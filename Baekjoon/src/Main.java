@@ -1,29 +1,34 @@
-import java.io.IOException;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
+import java.util.Scanner;
 
-// Baekjoon 4673 : 셀프넘버
+// Baekjoon 1065 : 한수
 public class Main {
-	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 	
-	public static void main(String[] args) throws IOException {
-		int n, m;
-		for(int i = 1; i <= 10000; i++)
+	public static void Hansu(int n)
+	{
+		int a, b, c;
+		int sum = 0;
+		
+		for(int i = 1; i <= n; i++)
 		{
-			int flag = 0;
-			n = i;
-			for(int j = 1; j < i; j++) 
+			a = i / 100;
+			b = (i % 100) / 10;
+			c = i % 10;
+			if(i < 100)
+				sum++;
+			else
 			{
-				m = j;	
-				m = m + (m / 1000) + ((m % 1000)/100) + ((m % 100)/10) + (m % 10);  
-				if(n == m)
-					flag = 1;										
+				if((b - a) == (c - b))
+					sum++;
 			}
-			if(flag == 0) 
-				bw.write(n + "\n");
 		}
-		bw.flush();
-		bw.close();
+		System.out.print(sum);	
 	}
+	
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		int num = scan.nextInt();
+		Hansu(num);
+	}
+		
 }
 
