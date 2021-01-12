@@ -1,0 +1,40 @@
+import java.util.Scanner;
+
+// Baekjoon 10809 : 알파벳 찾기
+public class Main {
+
+	public static void main(String[] args){
+		Scanner scan = new Scanner(System.in);
+		
+		// a ~ b = 97 ~ 122
+		char []alphabet = new char[26];
+		int []num = new int[26];
+		int []check = new int[26];
+		String str = scan.next();
+
+		for(int i = 0; i < 26; i++) // 초기화
+		{
+			alphabet[i] = (char)(97 + i); 
+			num[i] = -1;
+			check[i] = 0;
+		}
+		
+		for(int i = 0; i < str.length(); i++) // 검사
+		{
+			for(int j = 0; j < 26; j++)
+			{
+				if(alphabet[j] == str.charAt(i) && check[j] != 1)
+				{
+					check[j] = 1;
+					num[j] = i;
+					break;
+				}
+			}	
+		}
+		
+		for(int i = 0; i < 26; i++) // 출력
+		{
+			System.out.print(num[i] + " ");	
+		}
+	}
+}
