@@ -1,0 +1,12 @@
+import java.util.Scanner;
+
+// Baekjoon 11654 : 아스키 코드
+public class Main {
+
+	public static void main(String[] args){
+		Scanner scan = new Scanner(System.in);
+		char a = scan.nextLine().charAt(0);
+		int b = (int)a;
+		System.out.print(b);	
+	}
+}
