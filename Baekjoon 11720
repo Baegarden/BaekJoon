@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+// Baekjoon 11720 : 숫자의 합
+public class Main {
+
+	public static void main(String[] args){
+		Scanner scan = new Scanner(System.in);
+		
+		int a = scan.nextInt();
+		String str = scan.next();
+		int []b = new int[a];
+		int sum = 0;
+		
+		for(int i = 0; i < a; i++)
+		{
+			b[i] = (int)str.charAt(i); // 맨 앞부터 한자리씩 숫자 추출
+			sum += b[i] - '0';	
+		}
+		System.out.print(sum);	
+	}
+}
