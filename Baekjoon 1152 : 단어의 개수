@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+// Baekjoon 1152 : 단어의 개수
+public class Main {
+
+	public static void main(String[] args){
+		Scanner scan = new Scanner(System.in);
+		
+		String str = scan.nextLine();
+		int count = 1;
+		int flag = 0;
+		for(int i = 0; i < str.length(); i++)
+		{
+			if((int)str.charAt(i) == 32)
+			{
+				if(i != 0 && i != str.length() - 1)
+					count++;
+			}		
+			else
+				flag++;
+		}
+		if(flag == 0) // 문자열 전체가 공백일경우
+			System.out.print(flag);
+		else
+			System.out.print(count);
+	}
+}
