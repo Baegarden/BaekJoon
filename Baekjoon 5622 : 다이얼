@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+// Baekjoon 5622 : 다이얼
+public class Main {
+
+	public static void main(String[] args){
+		Scanner scan = new Scanner(System.in);
+		
+		int time_sum = 0;	
+		String str = scan.next();
+		for(int i = 0; i < str.length(); i++)
+		{
+			int check = (int)str.charAt(i);
+			if(check <= 67) // A~C
+				time_sum += 3;
+			else if(check <= 70) // D~F
+				time_sum += 4;
+			else if(check <= 73) // G~I
+				time_sum += 5;
+			else if(check <= 76) // J~L
+				time_sum += 6; 
+			else if(check <= 79) // M~Q
+				time_sum += 7;
+			else if(check <= 83) // P~S
+				time_sum += 8;
+			else if(check <= 86) // T~V
+				time_sum += 9;
+			else if(check <= 90) // W~Z
+				time_sum += 10;
+		}
+		System.out.print(time_sum);
+		}		
+}
