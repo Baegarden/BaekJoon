@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+// Baekjoon 2941 : 크로아티아 알파벳
+public class Main {
+
+	public static void main(String[] args){
+		Scanner scan = new Scanner(System.in);
+		String str = scan.next();
+		String str1 = "", str2 = "";
+		int n = 0; // 자리수
+		int sum = 0; // 알파벳 수
+		
+		while(n < str.length())
+		{
+			if((str.length() - n) > 1)
+				str1 = str.substring(n, n+2);
+			if((str.length() - n) > 2)
+				str2 = str.substring(n, n+3);
+			
+			if(str1.equals("c=") || str1.equals("c-") || str1.equals("z=")
+					|| str1.equals("d-") || str1.equals("lj") || str1.equals("nj")
+					|| str1.equals("s="))
+			{
+				n +=2;
+				sum ++;
+			}
+			else if(str2.equals("dz="))
+			{
+				n +=3;
+				sum ++;
+			}
+			else
+			{
+				char a = str.charAt(n);
+				if(a == '-' || a == '=') // 문장이 '-' 나 '='로만 구성되어 있을경우 
+					break;
+				else
+				{
+					n++;
+					sum++;	
+				}	
+			}
+		}
+		System.out.print(sum);	
+	}
+}
