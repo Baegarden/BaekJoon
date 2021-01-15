@@ -1,0 +1,18 @@
+import java.util.Scanner;
+
+// Baekjoon 1712 : 손익분기점
+public class Main {
+
+	public static void main(String[] args){
+		Scanner scan = new Scanner(System.in);
+	    int a = scan.nextInt();
+		int b = scan.nextInt();
+		int c = scan.nextInt();
+		int num = 0;
+		
+		if(b < c)
+			System.out.print(a / (c -b) + 1);
+		else 
+			System.out.print(-1);
+	}
+}
