@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+// Baekjoon 1193 : 분수찾기
+public class Main {
+
+	public static void main(String[] args){
+		Scanner scan = new Scanner(System.in);
+	    int num = scan.nextInt();
+	    int a = 0; // 기준 : 1, 3, 6, 10, 15 ...
+	    int count = 1; // 분모분자합 : 1, 2, 3, 4, 5 ...
+	   
+	    while(num > a)
+	    {
+	    	a += count;
+	    	count++;
+	    }
+	    if(count % 2 == 0) // 분모분자합이 짝수일때
+	    {
+	    	int gap = a - num;
+	    	int n = gap + 1;
+	    	int m = count - n;
+	    	System.out.print(n + "/"+ m);
+	    }
+	    else // // 분모분자합이 홀수일때
+	    {
+	    	int gap = a - num;
+	    	int m = gap + 1;
+	    	int n = count -m;
+	    	System.out.print(n + "/"+ m);
+	    }
+	}
+}
