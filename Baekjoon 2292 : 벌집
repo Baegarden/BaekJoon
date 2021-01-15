@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+// Baekjoon 2292 : 벌집
+public class Main {
+
+	public static void main(String[] args){
+		Scanner scan = new Scanner(System.in);
+	    int num = scan.nextInt();
+	    int count = 1;
+	    int b = 1;
+	    if(num == 1)
+		    System.out.print(count);
+	    else
+	    {
+	    	while(true)
+	    	{	    	
+		    	b += (count*6);
+		    	count++;
+		    	if(num <= b)
+		    		break;
+		    }
+		    System.out.print(count);
+	    }  
+	}
+}
