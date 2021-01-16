@@ -1,0 +1,49 @@
+import java.util.Scanner;
+
+// Baekjoon 2775 : 부녀회장이 될테야
+public class Main {
+
+	public static void main(String[] args){
+		Scanner scan = new Scanner(System.in);
+	    int num = scan.nextInt();
+	    int []H = new int[num]; 
+	    int []W = new int[num]; 
+	    int []result = new int[num];
+	    
+	    for(int i = 0; i < num; i++)
+	    {
+	    	H[i] = scan.nextInt();
+		    W[i] = scan.nextInt();
+		    int []sum_befroe = new int[W[i]]; 
+		    int []sum_after = new int[W[i]];
+		    
+		    for(int j = 0; j < W[i]; j++) // 0층 초기값설정
+		    {
+		    	sum_befroe[j] = j + 1;
+		    }
+		    for(int k = 0; k < H[i]; k++)
+		    {
+			    for(int j = 0; j < W[i]; j++) // n층을 구하기 위해 n층 초기화
+			    {
+			    	sum_after[j] = 0;
+			    }
+			    for(int j = 0; j < W[i]; j++) // n층 구하기
+			    {
+			    	for(int m = 0; m < j + 1; m++)
+			    	{
+				    	sum_after[j] += sum_befroe[m];
+			    	}
+			    }
+			    for(int j = 0; j < W[i]; j++) // 다음 n층을 구하기 위해 n-1층 초기화
+			    {  	
+			    	sum_befroe[j] = sum_after[j];
+			    }
+		    }
+		    result[i] = sum_after[W[i] - 1];
+	    }
+	    for(int i = 0; i < num; i++)
+	    {
+		    System.out.print(result[i] + "\n");
+	    }    
+	}
+}
