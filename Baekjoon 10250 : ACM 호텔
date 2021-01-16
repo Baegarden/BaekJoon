@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+// Baekjoon 10250 : ACM 호텔
+public class Main {
+
+	public static void main(String[] args){
+		Scanner scan = new Scanner(System.in);
+	    int num = scan.nextInt();
+	    int []H = new int[num];
+	    int []W = new int[num];
+	    int []N = new int[num];
+	    int count;
+	    
+	    for(int i = 0; i < num; i++)
+	    {
+	        H[i] = scan.nextInt();
+		    W[i] = scan.nextInt();
+		    N[i] = scan.nextInt();    	
+	    }    
+	    for(int i = 0; i < num; i++)
+	    {  	
+		    count = 1;
+	    	for(int x = 1; x <= W[i]; x++)
+		    {
+		    	for(int y = 1; y <= H[i]; y++)
+		    	{
+		    		if(count == N[i])
+		    		{
+		    			if(x > 9 && y <= 9) 
+				    		System.out.print(y + "" + x);
+			    		else if(x <= 9 && y > 9)
+				    		System.out.print(y + "0" + x);
+			    		else if(x > 9 && y > 9)
+				    		System.out.print(y + "" + x);
+			    		else
+			    			System.out.print(y + "0" + x);
+		    		}		
+		    		count++;
+		    	}
+		    }
+			System.out.print("\n");
+	    }    
+	}
+}
