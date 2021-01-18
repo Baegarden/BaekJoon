@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+// Baekjoon 10872 : 팩토리얼
+public class Main {
+	
+	public static int factorial(int n)
+	{
+		if(n > 1)
+			n = n * factorial(n-1);	
+		return n;
+	}
+	
+	public static void main(String[] args){
+		Scanner scan = new Scanner(System.in);
+	    int num = scan.nextInt();
+	    if(num == 0)
+		    System.out.print(1);
+	    else
+		    System.out.print(factorial(num));
+	}
+}
