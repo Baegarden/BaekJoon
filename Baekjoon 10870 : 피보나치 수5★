@@ -1,0 +1,52 @@
+import java.util.Scanner;
+
+// Baekjoon 10870 : 피보나치 수5
+public class Main {
+	
+	static char [][]star;
+	
+	public static void star(int n, int x, int y)
+	{
+		if(n == 1)
+		{
+			star[x][y] = '*';
+			return;
+		}
+			
+		star(n / 3, x,  y); 
+		star(n / 3, x + n / 3,  y);
+		star(n / 3, x + (n / 3) * 2,  y);
+		star(n / 3, x,  y + n / 3);
+		//star(n / 3, x + n / 3,  y + n / 3);
+		star(n / 3, x + (n / 3) * 2,  y + n / 3);
+		star(n / 3, x,  y + (n / 3) * 2);
+		star(n / 3, x + n / 3,  y + (n / 3) * 2);
+		star(n / 3, x + (n / 3) * 2,  y + (n / 3) * 2);
+	}
+	
+	public static void main(String[] args){
+		Scanner scan = new Scanner(System.in);
+	    int num = scan.nextInt();    
+	    star = new char[num][num];
+	    
+	    for(int i = 0; i < num; i++)
+	    {
+		    for(int j = 0; j < num; j++)
+		    {
+		    	star[i][j] = ' ';
+		    }
+	    }
+	    star(num, 0, 0);  
+	    
+	    StringBuilder sb= new StringBuilder();    //StringBuilder
+        for(int i = 0; i < num; i++) 
+        {
+            for(int j = 0; j < num; j++) 
+            {
+                sb.append(star[i][j]);
+            }
+            sb.append("\n");
+        }
+        System.out.println(sb.toString());
+	}
+}
