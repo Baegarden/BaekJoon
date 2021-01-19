@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+// Baekjoon 11729 : 하노이 탑 이동순서
+public class Main {
+	 static StringBuilder sb= new StringBuilder();
+	public static void hanoi(int n, int from, int middle, int to)
+	{
+		if(n == 1)
+		{
+			sb.append(from + " " + to + "\n");
+			return;
+		}
+		else
+		{
+			hanoi(n-1, from, to, middle);
+			hanoi(1, from, middle, to);
+			hanoi(n-1, middle, from, to);
+		}			
+	}
+	
+	public static void main(String[] args){
+		Scanner scan = new Scanner(System.in);
+		int num = scan.nextInt();
+		System.out.print((int)Math.pow(2, num) - 1 + "\n");
+		hanoi(num, 1, 2, 3);
+		System.out.println(sb.toString());
+	}
+}
