@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+// Baekjoon 2798 : 블랙잭
+public class Main {
+    public static void main(String args[]) {
+        Scanner scanner = new Scanner(System.in);
+        int size = scanner.nextInt();
+        int sum = scanner.nextInt();
+        int[] num = new int[size];
+
+        for (int i = 0; i < size; i++) {
+            num[i] = scanner.nextInt();
+        }
+
+        int max = sum;
+        int real_result = 0;
+        int result = 0;
+        int gap = 0;
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                for (int k = 0; k < size; k++) {
+                    if ((i != j && j != k) && i != k) {
+                        result = num[i] + num[j] + num[k];
+                        gap = sum - result;
+                        if ((gap <= max) && (gap >= 0)) {
+                            real_result = result;
+                            max = gap;
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(real_result);
+    }
+}
