@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+// Baekjoon 1436 : 영화감독 숌
+public class Main {
+    public static void main(String args[]) {
+        Scanner scanner = new Scanner(System.in);
+        int input = scanner.nextInt();
+        int b;
+        int num = 666;
+        int count = 0;
+
+        while (true) {
+            int size = 1;
+            int num_copy = num;
+            while(num_copy > 10) // num의 자리수계산
+            {
+                num_copy /= 10;
+                size++;
+            }
+            int []num_flag = new int[size];
+            int flag = 0;
+            for (int j = 1; j <= size; j++) {
+                if (j == size) {
+                    b = (int)(num / Math.pow(10, j - 1));
+                }
+                else {
+                    b = (int)((num % Math.pow(10, j)) / Math.pow(10, j - 1));
+                }
+                num_flag[j-1] = b;
+            }
+            for (int i = 0; i < size; i++) {
+                if (i > 1) {
+                    if (num_flag[i] == 6 && num_flag[i - 1] == 6 && num_flag[i - 2] == 6) {
+                        count++;
+                        break;
+                    }
+                }
+            }
+            if(count == input)
+                break;
+            num++;
+        }
+        System.out.println(num);
+    }
+}
