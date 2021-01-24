@@ -1,0 +1,46 @@
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
+
+// Baekjoon 10814 : 나이순 정렬
+class Student implements Comparable<Student> {
+    String name; //이름
+    int age; //나이
+    int num; //가입한 순번
+    public Student(String name, int age, int num){
+        this.name = name;
+        this.age = age;
+        this.num = num;
+    }
+    public String toString(){
+        return age + " " + name;
+    }
+    /* 기본 정렬 기준: 학번 오름차순 */
+    public int compareTo(Student anotherStudent) {
+        return Integer.compare(num, anotherStudent.num);
+    }
+}
+
+public class Main {
+    public static void main(String args[]) {
+        Scanner scanner = new Scanner(System.in);
+        int num_time = scanner.nextInt();
+        Student student[] = new Student[num_time];
+
+        for (int i = 0; i < num_time; i++) {
+            int age = scanner.nextInt();
+            String name = scanner.next();
+            student[i] = new Student(name, age, i);
+        }
+
+        Arrays.sort(student, new Comparator<Student>(){
+            public int compare(Student s1, Student s2) {
+                if(s2.age == s1.age) // 나이가 같을 때
+                    return Integer.compare(s1.num, s2.num); // 오름차순
+                return Integer.compare(s1.age, s2.age); // 오름차순
+            }
+        });
+        for (int i = 0; i < num_time; i++)
+            System.out.println(student[i]);
+    }
+}
