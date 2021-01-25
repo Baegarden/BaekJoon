@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+// Baekjoon 15649 : N과 M(1)
+public class Main {
+    private static int[] arr = new int[9];
+    private static int N, M;
+
+    public static void BT(int depth) {
+        if (depth > M) {
+            int flag = 1;
+            
+            // 중복검사
+            for (int j = 1; j <= M; j++) {
+                for (int k = j + 1; k <= M; k++) {
+                    if (arr[j] == arr[k])
+                        flag = 0;
+                }
+            }
+            
+            if (flag == 0) {
+                return;
+            }
+            else {
+                for (int i = 1; i <= M; i++) {
+                    System.out.print(arr[i] + " ");
+                }
+                System.out.print("\n");
+                return;
+            }
+        }
+        for (int i = 1; i <= N; i++) {
+            arr[depth] = i;
+            BT(depth + 1);
+        }
+    }
+    public static void main(String args[]) {
+        Scanner scanner = new Scanner(System.in);
+        N = scanner.nextInt();
+        M = scanner.nextInt();
+        BT(1);
+    }
+}
