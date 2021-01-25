@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-// Baekjoon 15649 : N과 M(1)
+// Baekjoon 15649 : N과 M(1) - 백트래킹 -> DFS ->트리로 이해
 public class Main {
     private static int[] arr = new int[9];
     private static int N, M;
