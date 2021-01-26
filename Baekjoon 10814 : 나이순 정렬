@@ -15,7 +15,7 @@ class Student implements Comparable<Student> {
     public String toString(){
         return age + " " + name;
     }
-    /* 기본 정렬 기준: 학번 오름차순 */
+    // 기본 정렬 기준: 가입한  오름차순
     public int compareTo(Student anotherStudent) {
         return Integer.compare(num, anotherStudent.num);
     }
