@@ -1,0 +1,46 @@
+import java.io.*;
+import java.util.Scanner;
+
+// Baekjoon 9663 : N-Queen
+public class Main {
+    private static int[] depth_before = new int[15];
+    private static int[] width_before = new int[15];
+
+    private static int N, count;
+
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+    public static int BT(int depth, int width) throws IOException {
+
+        for (int i = 0; i < depth; i++) {
+            if(depth == depth_before[i] || width == width_before[i] || Math.abs(depth - depth_before[i]) == Math.abs(width - width_before[i]))
+                return 0;
+        }
+
+        //종료
+        if (depth == N - 1) {
+            return 1;
+        }
+
+        // 전 말의 위치를 저장
+        depth_before[depth] = depth;
+        width_before[depth] = width;
+
+        int result = 0;
+        for (int i = 0; i < N; i++) {
+            result += BT(depth + 1, i);
+        }
+        return result;
+    }
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(br.readLine());
+        count = 0;
+        for (int i = 0; i < N; i++) {
+            count += BT(0, i);
+        }
+        bw.write(Integer.toString(count));
+        bw.flush();
+        bw.close();
+    }
+}
