@@ -1,0 +1,82 @@
+import java.io.*;
+import java.util.Arrays;
+import java.util.Scanner;
+
+// Baekjoon 2580 : 스도쿠
+public class Main {
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+    public static boolean backtrack(int board[][], int idx) {
+        if (idx == 81) return true;
+
+        int col = idx / 9;
+        int row = idx % 9;
+        int cur = board[col][row];
+        if (cur != 0) {
+            return backtrack(board, idx + 1);
+        } else { // 1 ~ 9까지 넣어보고 채우기 시작
+            for (int i = 1; i <= 9; i++) {
+                board[col][row] = i;
+                if (isValidSdoku(board)) {
+                    boolean b = backtrack(board, idx + 1);
+                    if (b) return b;
+                }
+            }
+            board[col][row] = 0;
+            return false;
+        }
+    }
+    public static boolean isValidSdoku(int[][] borad) {
+        boolean[] b = new boolean[9];
+
+        // 가로, 세로, 3*3에서 중복확인
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 9; j++) {
+                Arrays.fill(b, false);
+                for (int k = 0; k < 9; k++) {
+                    int cur = 0;
+                    if (i == 0) {
+                        cur = borad[j][k]; // 가로 확인
+                    } else if (i == 1) {
+                        cur = borad[k][j]; // 세로 확인
+                    } else {
+                        cur = borad[((j / 3) * 3) + (k / 3)][((j % 3) * 3) + (k % 3)]; // 3 * 3 확인
+                        // j = 구역 의미 k = 구역안의 좌표 의미 ex) j = 1, k = 2 -> board[0][5]를 의미
+                    }
+                    if(cur == 0)
+                        continue;
+                    int val = cur;
+                    if(b[val-1]) return false; // 이미 그곳이 true면 중복을 의미함으로 false 리턴
+                    b[val-1] = true;
+                }
+            }
+        }
+        return true;
+    }
+
+
+    public static void main(String args[]) throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int[][] board = new int[9][9];
+
+        for (int j = 0; j < 9; j++) {
+            String[] s = br.readLine().split(" ");
+            for (int k = 0; k < 9; k++) {
+                board[j][k] = Integer.parseInt(s[k]);
+            }
+        }
+
+        backtrack(board, 0);
+
+        for (int j = 0; j < 9; j++) {
+            for (int k = 0; k < 9; k++) {
+                bw.write(board[j][k] + " ");
+            }
+            bw.write("\n");
+        }
+        bw.flush();
+        bw.close();
+    }
+}
