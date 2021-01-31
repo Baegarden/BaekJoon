@@ -1,0 +1,31 @@
+import java.io.*;
+
+// Baekjoon 1074 : Z
+public class Main {
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+    public static int Z(int n, int r, int c) {
+        if(n == 0)
+            return 0;
+        int num = (int)Math.pow(2, n) / 2;
+        if(r < num && c < num)
+            return Z(n - 1, r, c);
+        else if (r < num && c >= num)
+            return  num * num + Z(n - 1, r, c - num);
+        else if (r >= num && c < num)
+            return  2 * num * num + Z(n - 1, r - num, c);
+        else
+            return  3 * num * num + Z(n - 1, r - num, c - num);
+    }
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N, r, c;
+
+        String[] tmp = br.readLine().split(" ");
+        N = Integer.parseInt(tmp[0]);
+        r = Integer.parseInt(tmp[1]);
+        c = Integer.parseInt(tmp[2]);
+
+        System.out.print(Z(N, r, c));
+    }
+}
