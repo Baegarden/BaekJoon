@@ -1,52 +1,43 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.Arrays;
 
-// Baekjoon 2447 : 별찍기-10
+// Baekjoon 2447 : 별 찍기 - 10
 public class Main {
-	
-	static char [][]star;
-	
-	public static void star(int n, int x, int y)
-	{
-		if(n == 1)
-		{
-			star[x][y] = '*';
-			return;
-		}
-			
-		star(n / 3, x,  y); 
-		star(n / 3, x + n / 3,  y);
-		star(n / 3, x + (n / 3) * 2,  y);
-		star(n / 3, x,  y + n / 3);
-		//star(n / 3, x + n / 3,  y + n / 3);
-		star(n / 3, x + (n / 3) * 2,  y + n / 3);
-		star(n / 3, x,  y + (n / 3) * 2);
-		star(n / 3, x + n / 3,  y + (n / 3) * 2);
-		star(n / 3, x + (n / 3) * 2,  y + (n / 3) * 2);
-	}
-	
-	public static void main(String[] args){
-		Scanner scan = new Scanner(System.in);
-	    int num = scan.nextInt();    
-	    star = new char[num][num];
-	    
-	    for(int i = 0; i < num; i++)
-	    {
-		    for(int j = 0; j < num; j++)
-		    {
-		    	star[i][j] = ' ';
-		    }
-	    }
-	    star(num, 0, 0);  
-	    
-	    StringBuilder sb= new StringBuilder();    //StringBuilder
-        for(int i = 0; i < num; i++) 
-        {
-            for(int j = 0; j < num; j++) 
-            {
-                sb.append(star[i][j]);
-            }
-            sb.append("\n");
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    static char [][]arr;
+
+    public static void paintStars(int a, int b, int n) throws IOException {
+        if (n == 1) {
+            arr[a][b] = '*';
+            return;
         }
-        System.out.println(sb.toString());
-	}
+        paintStars(a, b, n / 3);
+        paintStars(a, b + n / 3, n / 3);
+        paintStars(a, b + 2 * n / 3, n / 3);
+        paintStars(a + n / 3, b, n / 3);
+        //paintStars(a + n / 3, b + n / 3, n / 3);
+        paintStars(a + n / 3, b + 2 * n / 3, n / 3);
+        paintStars(a + 2 * n / 3, b, n / 3);
+        paintStars(a + 2 * n / 3, b + n / 3, n / 3);
+        paintStars(a + 2 * n / 3, b + 2 * n / 3, n / 3);
+    }
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        arr = new char[N][N];
+        for(int i = 0; i < arr.length; i++)
+            Arrays.fill(arr[i], ' ');
+
+        paintStars(0 ,0, N);
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                bw.write(arr[i][j]);
+            }
+            bw.write("\n");
+        }
+        bw.flush();
+        bw.close();
+    }
 }
