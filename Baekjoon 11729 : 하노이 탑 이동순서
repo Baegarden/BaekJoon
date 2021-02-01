@@ -1,28 +1,25 @@
-import java.util.Scanner;
+import java.io.*;
 
 // Baekjoon 11729 : 하노이 탑 이동순서
 public class Main {
-	 static StringBuilder sb= new StringBuilder();
-	public static void hanoi(int n, int from, int middle, int to)
-	{
-		if(n == 1)
-		{
-			sb.append(from + " " + to + "\n");
-			return;
-		}
-		else
-		{
-			hanoi(n-1, from, to, middle);
-			hanoi(1, from, middle, to);
-			hanoi(n-1, middle, from, to);
-		}			
-	}
-	
-	public static void main(String[] args){
-		Scanner scan = new Scanner(System.in);
-		int num = scan.nextInt();
-		System.out.print((int)Math.pow(2, num) - 1 + "\n");
-		hanoi(num, 1, 2, 3);
-		System.out.println(sb.toString());
-	}
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+    public static void hanoi(int from, int to, int n) throws IOException {
+        if (n == 1) {
+            bw.write(from + " " + to + "\n");
+            return;
+        }
+        hanoi(from, 6 - from - to, n - 1);
+        bw.write(from + " " + to + "\n");
+        hanoi(6 - from - to, to, n - 1);
+    }
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        System.out.print((int)Math.pow(2, N) - 1 + "\n");
+        hanoi(1, 3, N);
+        bw.flush();
+        bw.close();
+    }
 }
