@@ -1,0 +1,36 @@
+import java.io.*;
+import java.util.Arrays;
+
+// Baekjoon 1182 : 부분수열의 합
+public class Main {
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    static int []arr;
+    static int S, N;
+    static int count = 0;
+
+    public static void sum(int n, int cur_sum) throws IOException {
+        if (n == N) {
+            if(cur_sum == S)
+                count++;
+            return;
+        }
+        sum(n + 1, cur_sum);
+        sum(n + 1, cur_sum + arr[n]);
+    }
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] s1 = br.readLine().split(" ");
+        N = Integer.parseInt(s1[0]);
+        S = Integer.parseInt(s1[1]);
+        arr = new int[N];
+        String[] s2 = br.readLine().split(" ");
+        for (int i = 0; i < N; i++) {
+            arr[i] = Integer.parseInt(s2[i]);
+        }
+        sum(0, 0);
+        if (S == 0)
+            count--;
+        System.out.print(count);
+    }
+}
