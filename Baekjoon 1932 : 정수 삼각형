@@ -1,0 +1,40 @@
+import java.io.*;
+import java.util.Scanner;
+
+// Baekjoon 1932 : 정수 삼각형
+public class Main {
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    public static void main(String [] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Scanner scanner = new Scanner(System.in);
+
+        int N = Integer.parseInt(br.readLine());
+        int[][] num = new int[N][N];
+        int[][] sum = new int[N + 1][N];
+        int max_sum;
+
+        for (int i = 0; i < N; i++) {
+            String []str = br.readLine().split(" ");
+            for (int j = 0; j <= i; j++) {
+                num[i][j] = Integer.parseInt(str[j]);
+            }
+        }
+
+        for(int i = 1; i <= N; i++) {
+            for (int j = 0; j < N; j++) {
+                if(j == 0)
+                    sum[i][j] = sum[i - 1][j] + num[i - 1][j];
+                else
+                    sum[i][j] = Math.max(sum[i - 1][j - 1], sum[i - 1][j]) + num[i - 1][j];
+            }
+        }
+
+        // 최대값 도출
+        max_sum = Math.max(sum[N][0], sum[N][1]);
+        for (int i = 2; i < N; i++) {
+            max_sum = Math.max(max_sum, sum[N][i]);
+        }
+
+        System.out.print(max_sum);
+    }
+}
