@@ -32,3 +32,25 @@ public class Main {
 		
 }
 
+// Baekjoon 1065(2) : 한수
+public class Main {
+    public static int hanSu(int n) {
+        int numberOfHansu = 0;
+        for (int i = 1; i <= n; i++) {
+            if (i >= 100) {
+                if((i % 10) - ((i % 100) / 10) == ((i % 100) / 10) - (i / 100))
+                    numberOfHansu++;
+            }
+            else
+                numberOfHansu++;
+        }
+        return numberOfHansu;
+    }
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    public static void main(String [] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        System.out.print(hanSu(n));
+    }
+}
