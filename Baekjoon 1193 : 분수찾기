@@ -30,3 +30,20 @@ public class Main {
 	    }
 	}
 }
+
+# Baekjoon 1193(py) : 분수찾기
+input = int(input())
+num = 1
+sum = 0
+sum_pre = 0
+while(1):
+    sum_pre = sum
+    sum += num
+    if(sum >= input):
+        break
+    num += 1
+
+if(num % 2 == 0):
+    print(str(input - sum_pre) + "/" + str(num+1-(input - sum_pre)))
+else:
+    print(str(num+1-(input - sum_pre)) + "/" + str(input - sum_pre))
