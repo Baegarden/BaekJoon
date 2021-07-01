@@ -42,3 +42,24 @@ public class Main {
 	    }    
 	}
 }
+
+# Baekjoon 10250(py) : ACM 호텔
+num = int(input())
+result = []
+
+for i in range(0, num):
+    H, W, N = map(int, input().split())
+    if N % H == 0:
+        A = H
+        B = N // H
+    else:
+        A = N % H
+        B = (N // H) + 1
+
+    if B < 10:
+        result.append(str(A) + '0' + str(B))
+    else:
+        result.append(str(A) + str(B))
+
+for i in range(0, num):
+    print(result[i])
