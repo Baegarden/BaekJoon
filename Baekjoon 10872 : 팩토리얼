@@ -19,3 +19,16 @@ public class Main {
 		    System.out.print(factorial(num));
 	}
 }
+
+# Baekjoon 10872(py) : 팩토리얼
+num = int(input())
+
+
+def factorial(n):
+    if(n <= 1):
+        return 1
+    else:
+        return n * factorial(n-1)
+
+
+print(factorial(num))
