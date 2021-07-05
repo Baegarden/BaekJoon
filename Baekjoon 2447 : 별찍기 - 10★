@@ -41,3 +41,27 @@ public class Main {
         bw.close();
     }
 }
+
+# Baekjoon 2447(py) : 별찍기 - 10
+num = int(input())
+stars = [[' ' for col in range(num)] for row in range(num)]
+
+def drawStars(a, b, n):
+    if n == 1:
+        stars[a][b] = '*'
+        return
+    drawStars(a, b, n // 3)
+    drawStars(a, b + n // 3, n // 3)
+    drawStars(a, b + 2 * n // 3, n // 3)
+    drawStars(a + n // 3, b, n // 3)
+    # drawStars(a + n / 3, b + n / 3, n / 3)
+    drawStars(a + n // 3, b + 2 * n // 3, n // 3)
+    drawStars(a + 2 * n // 3, b, n // 3)
+    drawStars(a + 2 * n // 3, b + n // 3, n // 3)
+    drawStars(a + 2 * n // 3, b + 2 * n // 3, n // 3)
+
+drawStars(0, 0, num)
+for i in stars:
+    for j in i:
+        print(j, end="")
+    print()
