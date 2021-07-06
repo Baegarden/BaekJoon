@@ -42,3 +42,16 @@ public class Main {
         System.out.println(min);
     }
 }
+
+# Baekjoon 2231(py) : 분해합
+N = int(input())
+result = 0
+
+for num in range(1, N + 1):
+    num_list = list(map(int, str(num)))
+    final = num + sum(num_list)
+    if final == N:
+        result = num
+        break
+
+print(result)
