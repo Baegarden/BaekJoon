@@ -34,3 +34,19 @@ public class Main {
         System.out.println(real_result);
     }
 }
+
+# Baekjoon 2798(py) : 블랙잭
+N, M = map(int, input().split())
+num = list(map(int, input().split()))
+min = M
+for i in num:
+    for j in num:
+        for k in num:
+            if i == j or j == k or i == k:
+                break
+            sum = i + j + k
+            gap = M - sum
+            if gap >= 0 and min > gap:
+                min = gap
+
+print(M - min)
