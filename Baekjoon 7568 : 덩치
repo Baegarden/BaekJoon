@@ -30,3 +30,20 @@ public class Main {
         }
     }
 }
+
+# Baekjoon 7568(py) : 덩치
+N = int(input())
+array = [[' ' for col in range(3)] for row in range(N)]
+for i in range(0, N):
+    array[i][0], array[i][1] = map(int, input().split())
+
+for i in range(0, N):
+    rank = 1
+    for j in range(0, N):
+        if i != j:
+            if array[i][0] < array[j][0] and array[i][1] < array[j][1]:
+                rank += 1
+    array[i][2] = rank
+
+for i in range(0, N):
+    print(array[i][2], end=' ')
