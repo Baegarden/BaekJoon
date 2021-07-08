@@ -43,3 +43,30 @@ public class Main {
         System.out.println(num);
     }
 }
+
+# Baekjoon 1436(py) : 영화감독 숌
+
+N = int(input())
+num = 666
+sum = 0
+
+while(1):
+    count = 0
+    flag = 0
+    for i in str(num):
+        if (i == '6' and flag == 1) or (i == '6' and count == 0):
+            count += 1
+            flag = 1
+        else:
+            count = 0
+            flag = 0
+        if count == 3:
+            break
+
+    if count == 3:
+        sum += 1
+    if sum == N:
+        break
+    num += 1
+
+print(num)
