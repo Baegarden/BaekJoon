@@ -35,3 +35,23 @@ public class Main {
         BT(0);
     }
 }
+
+# Baekjoon 15649(py) : N과 M (1)
+N, M = map(int, input().split())
+array = [0 for i in range(10)]
+isUsed = [0 for i in range(10)]
+
+def backTrack(depth):
+    if depth == M:
+        for i in range(M):
+            print(array[i], end=" ")
+        print()
+        return
+    for i in range(0, N):
+        if isUsed[i] == 0:
+            array[depth] = i + 1    # index는 0부터 Sequence는 1부터
+            isUsed[i] = 1
+            backTrack(depth + 1)
+            isUsed[i] = 0
+
+backTrack(0)
