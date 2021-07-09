@@ -44,3 +44,16 @@ public class Main {
             System.out.println(student[i]);
     }
 }
+
+# Baekjoon 10814(py) : 나이순 정렬
+N = int(input())
+human = []
+
+for i in range(N):
+    human.append(input().split())
+    human[i][0] = int(human[i][0])
+
+human = sorted(human, key=lambda human: human[0])
+
+for i in range(N):
+    print(human[i][0], human[i][1])
