@@ -40,3 +40,30 @@ public class Main {
         System.out.print(count);
     }
 }
+
+# Baekjoon 9663(py) : N-Queen
+N = int(input())
+isUsed1 = [0 for i in range(N*2)]
+isUsed2 = [0 for i in range(N*2)]
+isUsed3 = [0 for i in range(N*2)]
+count = 0
+
+def backTrack(depth):  # x = depth, y = i
+    global count
+    if depth == N:
+        count += 1
+        return
+
+    for i in range(N):
+        if isUsed1[i] or isUsed2[depth + i] or isUsed3[depth - i + N - 1]:
+            continue
+        isUsed1[i] = 1
+        isUsed2[depth + i] = 1
+        isUsed3[depth - i + N - 1] = 1
+        backTrack(depth + 1)
+        isUsed1[i] = 0
+        isUsed2[depth + i] = 0
+        isUsed3[depth - i + N - 1] = 0
+
+backTrack(0)
+print(count)
