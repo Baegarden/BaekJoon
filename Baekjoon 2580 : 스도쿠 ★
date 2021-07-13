@@ -72,3 +72,48 @@ public class Main {
         sdoku(0, 0);
     }
 }
+
+# Baekjoon 2580(py) : 스도쿠
+board = list()  # 입력
+for i in range(9):
+    board.append(list(map(int, input().split())))
+
+def sudoku(x, y):
+    if y == 9:  # 줄 바꿈
+        sudoku(x + 1, 0)
+        return
+
+    if x == 9:  # 완료 되었을 시
+        for i in board:
+            for j in i:
+                print(j, end=" ")
+            print()
+        exit()
+
+    if board[x][y] != 0:    # 값이 0이 아닐때
+        sudoku(x, y + 1)
+    else:                   # 값이 0일때
+        for i in range(1, 10):
+            if isValid(x, y, i):
+                board[x][y] = i
+                sudoku(x, y + 1)
+        board[x][y] = 0
+        return
+
+def isValid(x, y, num):  # 값이 유효한지
+    row = (x // 3) * 3
+    col = (y // 3) * 3
+
+    for i in range(9):
+        if num == board[x][i]:
+            return False
+        if num == board[i][y]:
+            return False
+
+    for i in range(row, row + 3):
+        for j in range(col, col + 3):
+            if num == board[i][j]:
+                return False
+    return True
+
+sudoku(0, 0)
