@@ -58,3 +58,44 @@ public class Main {
         System.out.print(min);
     }
 }
+
+
+# Baekjoon 14889(py) : 연산자 끼워넣기
+N = int(input())
+array = []
+for i in range(N):
+    array.append(list(map(int, input().split())))
+start = [0 for i in range(N//2)]
+link = [0 for i in range(N//2)]
+min = 1000
+
+def calc(arr):
+    sum = 0
+    row = 0
+    col = 0
+    for i in range(N//2):
+        for j in range(i+1, N//2):
+            row = arr[i]
+            col = arr[j]
+            sum += array[row][col]
+            sum += array[col][row]
+    return sum
+
+def startNlink(num, idx1, idx2):
+    global min
+    if num == N:
+        result = abs(calc(start) - calc(link))
+        if min > result:
+            min = result
+        return
+
+    if idx1 < N // 2:
+        start[idx1] = num
+        startNlink(num+1, idx1+1, idx2)
+
+    if idx2 < N // 2:
+        link[idx2] = num
+        startNlink(num+1, idx1, idx2+1)
+
+startNlink(0, 0, 0)
+print(min)
