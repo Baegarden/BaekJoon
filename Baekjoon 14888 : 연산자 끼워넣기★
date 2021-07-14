@@ -61,3 +61,59 @@ public class Main {
     }
 
 }
+
+# Baekjoon 14888(py) : 연산자 끼워넣기
+N = int(input())
+num = list(map(int, input().split()))
+oper = list(map(int, input().split()))
+operUsed = [0 for i in range(N - 1)]
+min = 1000000000
+max = -1000000000
+
+def calc_2(x, y, z):
+    if z == 1:
+        return x + y
+    elif z == 2:
+        return x - y
+    elif z == 3:
+        return x * y
+    else:
+        if x < 0:
+            x *= -1
+            return -(x // y)
+        elif y < 0:
+            y *= -1
+            return -(x // y)
+        else:
+            return x // y
+
+def calc():
+    result = 0
+    for i in range(N):
+        if i == 0:
+            result = num[i]
+        else:
+            result = calc_2(result, num[i], operUsed[i - 1])
+    return result
+
+def func(depth):
+    global min, max
+    if depth == N - 1:
+        result = calc()
+        if min > result:
+            min = result
+        if max < result:
+            max = result
+        return
+
+    for i in range(4):
+        if oper[i] != 0:
+            oper[i] -= 1
+            operUsed[depth] = i + 1
+            func(depth + 1)
+            oper[i] += 1
+            operUsed[depth] = 0
+
+func(0)
+print(max)
+print(min)
