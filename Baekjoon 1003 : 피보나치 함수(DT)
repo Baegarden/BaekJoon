@@ -28,3 +28,25 @@ public class Main {
         }
     }
 }
+
+# Baekjoon 1003(py) : 피보나치 수열(DP)
+N = int(input())
+result = []
+
+for i in range(N):
+    M = int(input())
+    array0 = [0 for i in range(41)] # 0 출력회수 저장
+    array1 = [0 for i in range(41)] # 1 출력회수 저장
+    array0[0] = 1  
+    array0[1] = 0
+    array1[0] = 0
+    array1[1] = 1
+    for j in range(2, M+1):
+        array0[j] = array0[j-1] + array0[j-2]
+        array1[j] = array1[j-1] + array1[j-2]
+    result.append([array0[M], array1[M]])
+
+for i in result:
+    for j in i:
+        print(j, end=" ")
+    print()
