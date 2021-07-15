@@ -16,3 +16,14 @@ public class Main {
         System.out.print(num[N]);
     }
 }
+
+
+# Baekjoon 1904(py) : 01타일
+N = int(input())
+array = [1, 2]
+
+for i in range(2, N):
+    num = (array[i-1] + array[i-2]) % 15746
+    array.append(num)
+
+print(array[N-1])
