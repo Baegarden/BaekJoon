@@ -28,3 +28,19 @@ public class Main {
         }
     }
 }
+
+
+# Baekjoon 9461(py) : 파도반 수열
+N = int(input())
+result = []
+
+for i in range(N):
+    array = [1, 1, 1, 2, 2]
+    M = int(input())
+    for j in range(5, M):
+        num = array[j-1] + array[j-5]
+        array.append(num)
+    result.append(array[M-1])
+
+for i in result:
+    print(i)
