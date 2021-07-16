@@ -33,3 +33,25 @@ public class Main {
         System.out.print(max);
     }
 }
+
+# Baekjoon 2579(py) : 계단 오르기
+N = int(input())
+arr = []
+sum = [0 for i in range(N)]
+for i in range(N):
+    arr.append(int(input()))
+
+if N > 0:
+    sum[0] = arr[0]
+if N > 1:
+    sum[1] = arr[0]+arr[1]
+if N > 2:
+    sum[2] = max(arr[0]+arr[2], arr[1]+arr[2])
+
+# i번째에 도달하는 두가지 경우
+# (1) i-2 -> i
+# (2) i-3 -> i-1 -> i
+for i in range(3, N):
+    sum[i] = max(sum[i-2] + arr[i], sum[i-3] + arr[i-1] + arr[i])
+
+print(sum[N-1])
