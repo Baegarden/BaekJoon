@@ -1,0 +1,23 @@
+# Baekjoon 2156 : 포도주 시식
+
+# 입력
+N = int(input())
+arr = []
+for i in range(N):
+    arr.append(int(input()))
+
+# 초기값 설정
+sum = [0 for i in range(N+1)]
+sum[0] = 0
+sum[1] = arr[0]
+if N > 1:
+    sum[2] = arr[0] + arr[1]
+
+# 최대값 구하기
+for i in range(3, N+1):
+    num1 = sum[i-1]
+    num2 = sum[i-2] + arr[i-1]
+    num3 = sum[i-3] + arr[i-2] + arr[i-1]
+    sum[i] = max(num1, num2, num3)
+
+print(max(sum))
