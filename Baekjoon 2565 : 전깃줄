@@ -1,0 +1,26 @@
+# Baekjoon 2565 : 전깃줄
+
+# 입력
+N = int(input())
+arr = []
+num = [0 for i in range(501)]
+
+for i in range(N):
+    a, b = map(int, input().split())
+    arr.append([a, b])
+
+arr = sorted(arr, key=lambda x: x[0]) # 정렬
+arr2 = []
+for i in range(N):
+    arr2.append(arr[i][1])
+
+# 알고리즘
+for i in range(N):
+    maxNum = 0
+    for j in range(i):
+        if arr2[i] > arr2[j] and maxNum < num[j]:
+            maxNum = num[j]
+    num[i] = maxNum + 1
+
+# 출력
+print(N-max(num))
