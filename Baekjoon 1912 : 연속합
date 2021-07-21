@@ -1,0 +1,14 @@
+# Baekjoon 1912 : 연속합
+
+# 입력
+N = int(input())
+arr = list(map(int, input().split()))
+sum = [0 for i in range(N)]
+
+# 알고리즘
+sum[0] = arr[0]
+for i in range(1, N):
+    sum[i] = max(sum[i-1] + arr[i], arr[i])
+
+# 출력
+print(max(sum))
