@@ -18,3 +18,6 @@ for i in range(1, N+1):
 
 # 출력
 print(dp[N][K])
+
+
+https://fbtmdwhd33.tistory.com/60
