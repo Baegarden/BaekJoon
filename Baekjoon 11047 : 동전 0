@@ -1,0 +1,19 @@
+# Baekjoon 11047 : 동전 0
+
+# 입력
+N, K = map(int, (input().split()))
+arr = []
+for i in range(N):
+    arr.append(int(input()))
+
+# 알고리즘
+arr = list(reversed(arr))
+count = 0
+
+for i in range(N):
+    if K >= arr[i]:
+        count += K // arr[i]
+        K = K % arr[i]
+
+# 출력
+print(count)
