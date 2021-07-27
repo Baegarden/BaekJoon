@@ -1,0 +1,16 @@
+# Baekjoon 11399 : ATM
+
+# 입력
+N = int(input())
+arr1 = list(map(int, input().split()))
+arr2 = []
+
+# 알고리즘
+arr1.sort()
+tmp = 0
+for i in range(N):
+    tmp += arr1[i]
+    arr2.append(tmp)
+
+# 출력
+print(sum(arr2))
