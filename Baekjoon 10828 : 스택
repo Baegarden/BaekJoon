@@ -1,0 +1,84 @@
+# Baekjoon 10828 : 스택
+
+# 입력
+N = int(input())
+stack = [0 for i in range(10001)]
+arr = [" " for i in range(N)]
+for i in range(N):
+    arr[i] = input()
+pos = 0
+
+# 알고리즘
+def push(num):
+    global pos
+    stack[pos] = num
+    pos += 1
+
+def pop():
+    global pos
+    if pos == 0:
+        print(-1)
+    else:
+        print(stack[pos-1])
+        pos -= 1
+
+def size():
+    global pos
+    print(pos)
+
+def empty():
+    global pos
+    if pos == 0:
+        print(1)
+    else:
+        print(0)
+
+def top():
+    global pos
+    if pos == 0:
+        print(-1)
+    else:
+        print(stack[pos-1])
+
+# 출력
+for i in range(N):
+    str = arr[i][0:2]
+    if str == "pu":
+        num1, num2 = arr[i].split()
+        push(num2)
+    elif str == "po":
+        pop()
+    elif str == "si":
+        size()
+    elif str == "em":
+        empty()
+    else:
+        top()
+
+# 다른사람 코드
+import sys
+n = int(sys.stdin.readline())
+
+stack=[]
+for i in range(n):
+    command = sys.stdin.readline().split()
+
+    if command[0]=='push':
+        stack.append(command[1])
+    elif command[0]=='pop':
+        if len(stack)==0:
+            print(-1)
+        else:
+            print(stack.pop())
+    elif command[0] == 'size':
+        print(len(stack))
+    elif command[0] == 'empty':
+        if len(stack)==0:
+            print(1)
+        else:
+            print(0)
+    elif command[0] == 'top':
+        if len(stack)==0:
+            print(-1)
+        else:
+            print(stack[-1])
