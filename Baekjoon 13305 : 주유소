@@ -1,0 +1,22 @@
+# Baekjoon 13305 : 주유소
+
+# 입력
+N = int(input())
+distance = list(map(int, input().split()))
+price = list(map(int, input().split()))
+isUsed = [0 for i in range(N-1)]
+sum = 0
+
+# 알고리즘
+for i in range(N-1):
+    if isUsed[i] == 0:
+        sum += price[i] * distance[i]
+        for j in range(i+1, N-1):
+            if price[i] < price[j]:
+                sum += price[i] * distance[j]
+                isUsed[j] = 1
+            else:
+                break
+
+# 출력
+print(sum)
