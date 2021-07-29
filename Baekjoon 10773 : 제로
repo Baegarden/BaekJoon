@@ -1,0 +1,16 @@
+# Baekjoon 10773 : 제로
+
+# 입력
+K = int(input())
+arr = []
+
+# 알고리즘
+for i in range(K):
+    num = int(input())
+    if num == 0:
+        arr.pop()
+    else:
+        arr.append(num)
+
+# 출력
+print(sum(arr))
