@@ -1,0 +1,38 @@
+# Baekjoon 4949 : 균형잡힌 세상
+
+# 입력
+arr = []
+result = []
+while True:
+    s = input()
+    if s == ".":
+        break
+    arr.append(s[:-1])
+
+# 알고리즘
+for i in range(len(arr)):
+    stack = []
+    flag = 1
+    for j in arr[i]:
+        if j == "(" or j == "[":
+            stack.append(j)
+        elif j == ")":
+            if len(stack) != 0 and stack[-1] == "(":
+                stack.pop()
+            else:
+                flag = 0
+                break
+        elif j == "]":
+            if len(stack) != 0 and stack[-1] == "[":
+                stack.pop()
+            else:
+                flag = 0
+                break
+    if len(stack) == 0 and flag == 1:
+        result.append("yes")
+    else:
+        result.append("no")
+
+# 출력
+for i in result:
+    print(i)
