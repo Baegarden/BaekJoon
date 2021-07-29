@@ -1,0 +1,32 @@
+# Baekjoon 9012 : 괄호
+
+# 입력
+N = int(input())
+result = []
+
+# 알고리즘
+def isVPS(str1):
+    pos = 0
+    for i in range(len(str1)):
+        if pos < 0:
+            return False
+        if str1[i] == '(':
+            pos += 1
+        else:
+            pos -= 1
+    if pos == 0:
+        return True
+    else:
+        return False
+
+
+for i in range(N):
+    s = input()
+    if isVPS(s) == True:
+        result.append("YES")
+    else:
+        result.append("NO")
+
+# 출력
+for i in result:
+    print(i)
