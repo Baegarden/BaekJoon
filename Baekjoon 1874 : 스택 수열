@@ -1,0 +1,41 @@
+# Baekjoon 1874 : 스택 수열
+
+# 입력
+N = int(input())
+arr = []
+result = []
+stack = [0]
+for i in range(N):
+    arr.append(int(input()))
+
+# 알고리즘
+pos = 0
+index = 0
+flag = 1
+for i in arr:
+    while True:
+        if pos >= N and stack[index] != i:
+            flag = 0
+            break
+        if stack[index] == i:
+            index -= 1
+            result.append("-")
+            stack.pop()
+            break
+        elif stack[index] < i:
+            pos += 1
+            index += 1
+            result.append("+")
+            stack.append(pos)
+        elif stack[index] > i:
+            index -= 1
+            result.append("-")
+            stack.pop()
+    if flag == 0:
+        print("NO")
+        break
+
+# 출력
+if flag == 1:
+    for i in result:
+        print(i)
