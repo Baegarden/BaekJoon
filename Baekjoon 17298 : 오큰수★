@@ -1,0 +1,21 @@
+# Baekjoon 17298 : 오큰수
+
+# 입력
+N = int(input())
+arr = list(map(int, input().split()))
+result = [0 for i in range(N)]
+stack = []
+
+# 알고리즘
+for i in reversed(range(N)):    # 뒤에서부터 진행
+    while len(stack) != 0 and stack[len(stack)-1] <= arr[i]:    # 스택의 top이 자신보다 클때까지 pop진행
+        stack.pop()
+    if len(stack) == 0:     # 스택이 빌 경우 자신보다 큰값이 없다는 뜻이므로 -1
+        result[i] = -1
+    else:                   # 스택의 가장 높은인덱스가 오큰수
+        result[i] = stack[len(stack)-1]
+    stack.append(arr[i])    # 스택의 가장 높은인덱스를 자신으로 바꿔주며 비교진행
+
+# 출력
+for i in result:
+    print(i, end=" ")
