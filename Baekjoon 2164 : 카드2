@@ -1,0 +1,29 @@
+# Baekjoon 2164 : 카드2
+
+# 입력
+N = int(input())
+
+# 알고리즘
+queue = []
+head = 0
+size = 0
+flag = 0
+
+for i in range(N):
+    queue.append(i + 1)
+    size += 1
+
+while True:
+    if size == 1:
+        break
+    if flag == 0:
+        head += 1
+        size -= 1
+        flag = 1
+    else:
+        queue.append(queue[head])
+        head += 1
+        flag = 0
+
+# 출력
+print(queue[len(queue)-1])
