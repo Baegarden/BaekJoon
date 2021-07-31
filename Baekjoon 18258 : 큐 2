@@ -1,0 +1,76 @@
+# Baekjoon 18258 : 큐 2
+import sys
+
+# 입력
+N = int(input())
+arr = []
+for i in range(N):
+    arr.append(sys.stdin.readline()[:-1])
+
+# 알고리즘
+queue = [0 for i in range(2000000)]
+head = 0
+tail = 0
+qsize = 0
+
+
+def push(num):
+    global tail
+    global qsize
+    queue[tail] = num
+    tail += 1
+    qsize += 1
+
+
+def pop():
+    global head
+    global qsize
+    if queue[head] == 0:
+        print(-1)
+    else:
+        print(queue[head])
+        head += 1
+        qsize -= 1
+
+
+def size():
+    print(qsize)
+
+
+def empty():
+    if qsize == 0:
+        print(1)
+    else:
+        print(0)
+
+
+def front():
+    if qsize == 0:
+        print(-1)
+    else:
+        print(queue[head])
+
+
+def back():
+    if qsize == 0:
+        print(-1)
+    else:
+        print(queue[tail-1])
+
+
+# 출력
+for i in arr:
+    str = i[0:2]
+    if str == "pu":
+        num1, num2 = i.split()
+        push(num2)
+    elif str == "po":
+        pop()
+    elif str == "si":
+        size()
+    elif str == "em":
+        empty()
+    elif str == "fr":
+        front()
+    else:
+        back()
