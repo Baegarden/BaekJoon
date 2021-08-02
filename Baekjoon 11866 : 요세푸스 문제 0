@@ -1,0 +1,31 @@
+# Baekjoon 11866 : 요세푸스 문제 0
+
+# 입력
+N, K = map(int, input().split())
+
+# 알고리즘
+queue = []
+result = []
+head = 0
+count = 0
+for i in range(N):
+    queue.append(i+1)
+
+while len(result) != N:
+    count += 1
+    if count != K:
+        queue.append(queue[head])
+        head += 1
+    else:
+        result.append(queue[head])
+        head += 1
+        count = 0
+
+# 출력
+print("<", end="")
+for i in range(N):
+    if i != N-1:
+        print(str(result[i]) + ", ", end="")
+    else:
+        print(str(result[i]), end="")
+print(">")
