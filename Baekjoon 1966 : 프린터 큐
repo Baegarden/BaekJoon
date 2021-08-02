@@ -1,0 +1,30 @@
+# Baekjoon 1966 : 프린터 큐
+
+# 입력
+numTest = int(input())
+result = []
+
+# 알고리즘
+for i in range(numTest):
+    N, M = map(int, input().split())
+    queue = list(map(int, input().split()))
+    order = list(range(len(queue)))
+    order[M] = "goal"
+    count = 0
+
+    while True:
+        if queue[0] == max(queue):
+            count += 1
+            if order[0] == "goal":
+                result.append(count)
+                break
+            else:
+                queue.pop(0)
+                order.pop(0)
+        else:
+            queue.append(queue.pop(0))
+            order.append(order.pop(0))
+
+# 출력
+for i in result:
+    print(i)
