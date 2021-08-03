@@ -1,0 +1,92 @@
+# Baekjoon 10866 : 덱
+import sys
+
+# 입력
+N = int(input())
+arr = []
+for i in range(N):
+    arr.append(sys.stdin.readline()[:-1])
+
+# 알고리즘
+MX = 10001
+deque = [0 for i in range(MX*2+1)]
+head = MX
+tail = MX
+dsize = 0
+
+def push_front(num):
+    global head
+    global dsize
+    head -= 1
+    deque[head] = num
+    dsize += 1
+
+def push_back(num):
+    global tail
+    global dsize
+    deque[tail] = num
+    tail += 1
+    dsize += 1
+
+def pop_front():
+    global head
+    global dsize
+    if dsize == 0:
+        print(-1)
+    else:
+        print(deque[head])
+        head += 1
+        dsize -= 1
+
+def pop_back():
+    global tail
+    global dsize
+    if dsize == 0:
+        print(-1)
+    else:
+        tail -= 1
+        print(deque[tail])
+        dsize -= 1
+
+def size():
+    print(dsize)
+
+def empty():
+    if dsize == 0:
+        print(1)
+    else:
+        print(0)
+
+def front():
+    if dsize == 0:
+        print(-1)
+    else:
+        print(deque[head])
+
+def back():
+    if dsize == 0:
+        print(-1)
+    else:
+        print(deque[tail-1])
+
+# 출력
+for i in arr:
+    str = i.split()
+    if str[0] == "push_front":
+        num = i.split()
+        push_front(num[1])
+    elif str[0] == "push_back":
+        num = i.split()
+        push_back(num[1])
+    elif str[0] == "pop_front":
+        pop_front()
+    elif str[0] == "pop_back":
+        pop_back()
+    elif str[0] == "size":
+        size()
+    elif str[0] == "empty":
+        empty()
+    elif str[0] == "front":
+        front()
+    else:
+        back()
