@@ -1,0 +1,25 @@
+# Baekjoon 1021 : 회전하는 큐
+
+# 입력
+N, M = map(int, input().split())
+arr = list(map(int, input().split()))
+
+# 알고리즘
+deque = list(range(1, N+1))
+count = 0
+
+for i in range(M):
+    while True:
+        if deque[0] == arr[i]:
+            deque.pop(0)
+            break
+        else:
+            if deque.index(arr[i]) <= len(deque)//2:
+                deque.append(deque.pop(0))
+                count += 1
+            else:
+                deque.insert(0, deque.pop())
+                count += 1
+
+# 출력
+print(count)
