@@ -1,0 +1,26 @@
+# Baekjoon 1920 : 수 찾기
+
+# 입력
+N = int(input())
+A = list(map(int, input().split()))
+M = int(input())
+arr = list(map(int, input().split()))
+
+# 알고리즘
+def binarySearch(target):
+    st = 0
+    en = N - 1
+    while st <= en:
+        mid = (st + en) // 2
+        if A[mid] < target:
+            st = mid + 1
+        elif A[mid] > target:
+            en = mid - 1
+        else:
+            return 1
+    return 0
+
+# 출력
+A.sort()
+for i in arr:
+    print(binarySearch(i))
