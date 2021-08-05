@@ -1,0 +1,36 @@
+# Baekjoon 10816 : 숫자 카드 2
+
+# 입력
+N = int(input())
+A = list(map(int, input().split()))
+M = int(input())
+arr = list(map(int, input().split()))
+result = []
+
+# 알고리즘
+def lowerIdx(target):
+    st = 0
+    en = N
+    while st < en:
+        mid = (st + en) // 2
+        if A[mid] >= target:
+            en = mid
+        else:
+            st = mid + 1
+    return st
+
+def upperIdx(target):
+    st = 0
+    en = N
+    while st < en:
+        mid = (st + en) // 2
+        if A[mid] > target:
+            en = mid
+        else:
+            st = mid + 1
+    return st
+
+# 출력
+A.sort()
+for i in arr:
+    print(upperIdx(i)-lowerIdx(i), end=" ")
