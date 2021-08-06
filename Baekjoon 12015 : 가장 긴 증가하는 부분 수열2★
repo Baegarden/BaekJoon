@@ -1,0 +1,24 @@
+# Baekjoon 12015 : 가장 긴 증가하는 부분 수열2
+
+# 입력
+N = int(input())
+input = list(map(int, input().split()))
+arr = [0]
+
+# 알고리즘
+for i in input:
+    if arr[len(arr)-1] < i:
+        arr.append(i)
+    else:   # 이분탐색 후 삽입
+        st = 1
+        en = len(arr) - 1
+        while st <= en:
+            mid = (st+en)//2
+            if arr[mid] < i:
+                st = mid + 1
+            else:
+                en = mid - 1
+        arr[st] = i
+
+# 출력
+print(len(arr)-1)
