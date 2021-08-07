@@ -1,0 +1,39 @@
+# Baekjoon 2630 : 색종이 만들기
+
+# 입력
+N = int(input())
+arr = [0 for i in range(N)]
+for i in range(N):
+    arr[i] = list(map(int, input().split()))
+
+# 알고리즘
+num1 = 0
+num2 = 0
+
+def divideAndConquer(x, y, n):
+    global num1, num2
+    if check(x, y, n):
+        if arr[x][y] == 0:
+            num1 += 1
+        else:
+            num2 += 1
+    else:
+        divideAndConquer(x, y, n//2)
+        divideAndConquer(x, y+n//2, n//2)
+        divideAndConquer(x+n//2, y, n//2)
+        divideAndConquer(x+n//2, y+n//2, n//2)
+
+
+def check(x, y, n):
+    initial = arr[x][y]
+    for i in range(n):
+        for j in range(n):
+            if arr[x+i][y+j] != initial:
+                return False
+    return True
+
+
+# 출력
+divideAndConquer(0, 0, N)
+print(num1)
+print(num2)
