@@ -1,0 +1,30 @@
+# Baekjoon 1992 : 쿼드트리
+
+# 입력
+N = int(input())
+arr = [0 for i in range(N)]
+for i in range(N):
+    arr[i] = list(map(int, input()))
+
+# 알고리즘
+def quadTree(x, y, n):
+    if check(x, y, n):
+        print(arr[x][y], end="")
+    else:
+        print("(", end="")
+        quadTree(x, y, n//2)  # 왼쪽 위
+        quadTree(x, y+n//2, n//2)  # 오른쪽 위
+        quadTree(x+n//2, y, n//2)  # 왼쪽 아래
+        quadTree(x+n//2, y+n//2, n//2)  # 오른쪽 아래
+        print(")", end="")
+
+def check(x, y, n):
+    initial = arr[x][y]
+    for i in range(n):
+        for j in range(n):
+            if arr[x+i][y+j] != initial:
+                return False
+    return True
+
+# 출력
+quadTree(0, 0, N)
