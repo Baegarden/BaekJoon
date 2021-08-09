@@ -1,0 +1,21 @@
+# Baekjoon 1629 : 곱셈
+import sys
+
+# 입력
+A, B, C = map(int, sys.stdin.readline().split())
+
+# 알고리즘
+# "(A*B)%C= ((A%C)*(B%C))%C"
+def func(a, b, c):
+    tmp = 0
+    if b == 1:
+        return a % c
+    elif b % 2 == 0:
+        tmp = func(a, b//2, c) % c
+        return (tmp*tmp) % c
+    else:
+        return (func(a, b-1, c)*(a % c)) % c
+
+
+# 출력
+print(func(A, B, C))
