@@ -1,0 +1,49 @@
+# Baekjoon 1780 : 종이의 개수
+
+# 입력
+N = int(input())
+arr = [0 for i in range(N)]
+for i in range(N):
+    arr[i] = list(map(int, input().split()))
+
+# 알고리즘
+num1 = 0    # 0
+num2 = 0    # 1   
+num3 = 0    # -1
+
+
+def quadTree(x, y, n):
+    global num1, num2, num3
+    if check(x, y, n):
+        if arr[x][y] == 0:
+            num1 += 1
+        elif arr[x][y] == 1:
+            num2 += 1
+        else:
+            num3 += 1
+    else:
+        quadTree(x, y, n//3)
+        quadTree(x, y+n//3, n//3)
+        quadTree(x, y+n*2//3, n//3)
+        quadTree(x+n//3, y, n//3)
+        quadTree(x+n//3, y+n//3, n//3)
+        quadTree(x+n//3, y+n*2//3, n//3)
+        quadTree(x+n*2//3, y, n//3)
+        quadTree(x+n*2//3, y+n//3, n//3)
+        quadTree(x+n*2//3, y+n*2//3, n//3)
+
+
+def check(x, y, n):
+    initial = arr[x][y]
+    for i in range(n):
+        for j in range(n):
+            if arr[x+i][y+j] != initial:
+                return False
+    return True
+
+
+# 출력
+quadTree(0, 0, N)
+print(num3)
+print(num1)
+print(num2)
