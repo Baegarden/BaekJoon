@@ -1,0 +1,27 @@
+# Baekjoon 2740 : 행렬 곱셈
+
+# 입력
+N, M = map(int, input().split())
+A = []
+B = []
+for i in range(N):
+    A.append(list(map(int, input().split())))
+
+M, K = map(int, input().split())
+for i in range(M):
+    B.append(list(map(int, input().split())))
+
+# 알고리즘
+# (N*M) * (M*E) = N*E
+C = [[0 for j in range(K)] for i in range(N)]
+for i in range(N):
+    tmp = []
+    for j in range(K):
+        for k in range(M):
+            C[i][j] += A[i][k] * B[k][j]
+
+# 출력
+for i in C:
+    for j in i:
+        print(j, end=" ")
+    print()
