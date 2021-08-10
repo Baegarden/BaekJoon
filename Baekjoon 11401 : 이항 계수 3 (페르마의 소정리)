@@ -1,0 +1,29 @@
+# Baekjoon 11401 : 이항 계수 3 (페르마의 소정리)
+
+# 입력
+N, K = map(int, input().split())
+
+# 알고리즘
+P = 1000000007
+fact = [0 for i in range(N+1)]
+fact[0] = 1
+fact[1] = 1
+
+for i in range(2, N+1):
+    fact[i] = (fact[i-1] * i) % P
+
+a = fact[N]
+b = (fact[N-K] * fact[K]) % P
+e = P-2
+pow_b = 1
+
+while e > 0:
+    if e % 2 == 1:
+        pow_b = (pow_b * b) % P
+    b = (b * b) % P
+    e //= 2
+
+# 출력
+print((a * pow_b) % P)
+
+# 참고링크 https://blog.naver.com/gkfla1017/222249345214 
