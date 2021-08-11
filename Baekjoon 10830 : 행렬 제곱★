@@ -1,0 +1,41 @@
+# Baekjoon 10830 : 행렬 제곱
+
+# 입력
+N, B = map(int, input().split())
+A = []
+for i in range(N):
+    A.append(list(map(int, input().split())))
+
+# 알고리즘
+# A^15 = (A^7)*(A^7)*A = ((A^3)*(A^3)*A)*((A^3)*(A^3)*A)*A ...
+# 이렇게 분할로 나눠서 진행하면 연산의 수가 줄어든다.
+
+
+def mult(a, b):
+    tmp1 = [[0 for j in range(N)] for i in range(N)]
+    for i in range(N):
+        for j in range(N):
+            for k in range(N):
+                tmp1[i][j] += a[i][k] * b[k][j]
+            tmp1[i][j] %= 1000            
+    return tmp1
+
+
+def divide(num, matrix):
+    if num == 1:
+        return matrix
+    elif num == 2:
+        return mult(matrix, matrix)
+    else:
+        tmp2 = divide(num//2, matrix)
+        if num % 2 == 0:
+            return mult(tmp2, tmp2)
+        else:
+            return mult(mult(tmp2, tmp2), matrix)
+
+# 출력
+result = divide(B, A)
+for i in result:
+    for j in i:
+        print(j % 1000, end=" ")
+    print()
