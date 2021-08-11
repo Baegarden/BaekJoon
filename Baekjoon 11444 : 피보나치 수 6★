@@ -30,4 +30,6 @@ def divide(num, matrix):
             return mult(mult(tmp2, tmp2), matrix)
 
 # 출력
+# 결국 Fn = [1 1]^n 에서 2행1열의 값이다
+#           [1 0]
 print(divide(N, A)[1][0])
