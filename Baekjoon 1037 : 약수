@@ -1,0 +1,11 @@
+# Baekjoon 1037 : 약수
+
+# 입력
+num = int(input())
+arr = list(map(int, input().split()))
+
+# 알고리즘
+arr.sort()
+
+# 출력
+print(arr[0]*arr[len(arr)-1])
