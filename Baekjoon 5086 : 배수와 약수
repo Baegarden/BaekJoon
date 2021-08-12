@@ -1,0 +1,19 @@
+# Baekjoon 5086 : 배수와 약수
+
+# 입력
+result = []
+while True:
+    a, b = map(int, input().split())
+    if a == 0 and b == 0:
+        break
+    if b % a == 0:
+        result.append("factor")
+    elif a % b == 0:
+        result.append("multiple")
+    else:
+        result.append("neither")
+
+# 알고리즘
+# 출력
+for i in result:
+    print(i)
