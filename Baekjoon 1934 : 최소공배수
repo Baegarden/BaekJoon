@@ -1,0 +1,26 @@
+# Baekjoon 1934 : 최소공배수
+
+# 입력
+N = int(input())
+
+# 알고리즘
+result = []
+def gcd(a, b):
+    tmp = 0
+    g = 0
+    while True:
+        tmp = a % b
+        if tmp == 0:
+            g = b
+            break
+        a = b
+        b = tmp
+    return g
+
+for i in range(N):
+    A, B = map(int, input().split())
+    result.append(A*B//gcd(A, B))
+
+# 출력
+for i in result:
+    print(i)
