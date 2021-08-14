@@ -1,0 +1,16 @@
+# Baekjoon 1010 : 다리 놓기
+
+# 입력
+T = int(input())
+for i in range(T):
+    N, M = map(int, input().split())
+
+    # 알고리즘
+    num1 = 1
+    num2 = 1
+    for i in range(N):
+        num1 *= M-i
+        num2 *= N-i
+
+    # 출력
+    print(num1//num2)
