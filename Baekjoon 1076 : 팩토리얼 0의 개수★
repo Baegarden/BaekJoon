@@ -1,0 +1,13 @@
+# Baekjoon 1076 : 팩토리얼 0의 개수
+
+# 입력
+N = int(input())
+
+# 알고리즘
+result = 0
+while N >= 5:
+    result += N // 5
+    N //= 5
+
+# 출력
+print(result)
