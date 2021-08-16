@@ -1,0 +1,21 @@
+# Baekjoon 9375 : 패션왕 신해빈
+
+# 입력
+testCase = int(input())
+
+# 알고리즘
+for i in range(testCase):
+    dic = {}
+    N = int(input())
+    for j in range(N):
+        v, k = input().split()
+        if k not in dic:
+            dic[k] = 1
+        else:
+            dic[k] += 1
+
+    # 출력
+    ans = 1
+    for value in dic.values():
+        ans *= (value + 1)  # 카테고리의 의상의 개수중에 하나를 입거나 안입거나의 경우 +1
+    print(ans - 1)          # 아무것도 안 입는 경우가 포함되어 있기 때문에 -1
