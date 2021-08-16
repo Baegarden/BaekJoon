@@ -1,0 +1,31 @@
+# Baekjoon 2004 : 조합 0의 개수
+
+# 입력
+N, M = map(int, input().split())
+NM = N - M
+
+# 알고리즘
+def func(n, m, nm, i):
+    numN = 0
+    while n >= i:
+        numN += n // i
+        n //= i
+    numM = 0
+    while m >= i:
+        numM += m // i
+        m //= i
+    numNM = 0
+    while nm >= i:
+        numNM += nm // i
+        nm //= i
+    return numN-numNM-numM
+
+# 2, 5 중에 개수가 적은 것을 고름
+num1 = func(N, M, NM, 5)
+num2 = func(N, M, NM, 2)
+
+# 출력
+if num1 > num2:
+    print(num2)
+else:
+    print(num1)
