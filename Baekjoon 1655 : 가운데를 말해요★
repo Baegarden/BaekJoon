@@ -1,0 +1,28 @@
+# Baekjoon 1655 : 가운데를 말해요
+import sys
+import heapq
+
+# 입력
+N = int(input())
+
+# 알고리즘
+left, right = [], []
+result = []
+for i in range(N):
+    num = int(sys.stdin.readline())
+    if len(left) == len(right):
+        heapq.heappush(left, (-num, num))
+    else:
+        heapq.heappush(right, (num, num))
+
+    # 오른쪽의 가장 작은 값보다, 왼쪽의 가장 작은 값이 큰 경우
+    if len(right) != 0 and left[0][1] > right[0][1]:
+        leftValue = heapq.heappop(left)[1]
+        rightValue = heapq.heappop(right)[1]
+        heapq.heappush(right, (leftValue, leftValue))
+        heapq.heappush(left, (-rightValue, rightValue))
+    result.append(left[0][1])
+
+# 출력
+for i in result:
+    print(i)
