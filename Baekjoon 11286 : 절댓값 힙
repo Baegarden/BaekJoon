@@ -1,0 +1,24 @@
+# Baekjoon 11286 : 절댓값 힙
+import sys
+import heapq
+
+# 입력
+N = int(input())
+
+# 알고리즘
+heap = []
+result = []
+for i in range(N):
+    num = int(sys.stdin.readline())
+    lenHeap = len(heap)
+    if num == 0:
+        if lenHeap == 0:
+            result.append(0)
+        else:
+            result.append(heapq.heappop(heap)[1])
+    else:
+        heapq.heappush(heap, (abs(num), num))
+
+# 출력
+for i in result:
+    print(i)
