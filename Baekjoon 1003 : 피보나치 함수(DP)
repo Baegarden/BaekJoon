@@ -1,6 +1,6 @@
 import java.io.*;
 
-// Baekjoon 1003 : 피보나치 함수(DT)
+// Baekjoon 1003 : 피보나치 함수(DP)
 public class Main {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     public static void main(String [] args) throws IOException{
