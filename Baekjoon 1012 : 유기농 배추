@@ -1,0 +1,43 @@
+# Baekjoon 1012 : 유기농 배추
+from collections import deque
+import sys
+
+# 입력
+T = int(input())
+
+# 알고리즘
+def bfs(graph, a, b, n, m):
+    queue = deque()
+    queue.append((a, b))
+    graph[a][b] = 0     # 다시 방문하지 않도록
+
+    while queue:
+        x, y = queue.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if nx < 0 or nx >= n or ny < 0 or ny >= m:
+                continue
+            if graph[nx][ny] == 1:
+                graph[nx][ny] = 0
+                queue.append((nx, ny))
+
+
+for i in range(T):
+    M, N, K = map(int, input().split())
+    arr = [[0 for j in range(M)] for i in range(N)]
+    dx = [0, 0, 1, -1]
+    dy = [1, -1, 0, 0]
+    num = 0
+
+    for j in range(K):
+        x, y = map(int, input().split())
+        arr[y][x] = 1
+
+    for j in range(N):
+        for k in range(M):
+            if arr[j][k] == 1:
+                bfs(arr, j, k, N, M)    # 한 구역을 0으로 만듦 
+                num += 1
+    # 출력
+    print(num)
