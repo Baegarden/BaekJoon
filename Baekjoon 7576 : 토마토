@@ -1,0 +1,38 @@
+# Baekjoon 7576 : 토마토
+from collections import deque
+
+# 입력
+M, N = map(int, input().split())
+arr = []
+queue = deque()
+for i in range(N):
+    arr.append(list(map(int, input().split())))
+    for j in range(M):
+            if arr[i][j] == 1:
+                queue.append((i, j))
+# 알고리즘
+dx = [0, 0, 1, -1]
+dy = [1, -1, 0, 0]
+
+#시작점이 여러개이므로 큐에 여러점을 넣고 시작
+while queue:
+    x, y = queue.popleft()
+    for i in range(4):
+        nx = x + dx[i]
+        ny = y + dy[i]
+        if nx < 0 or nx >= N or ny < 0 or ny >= M:
+            continue
+        if arr[nx][ny] == 0:
+            arr[nx][ny] = arr[x][y] + 1
+            queue.append((nx, ny))
+
+# 출력
+result = 0
+for i in arr:
+    for j in i:
+        if j == 0:
+           print(-1)
+           exit(0)
+        if result < j:
+            result = j
+print(result - 1)
