@@ -1,0 +1,45 @@
+# Baekjoon 7569 : 토마토(3차원)
+from collections import deque
+import sys
+
+# 입력
+M, N, H = map(int, input().split())
+arr = []
+queue = deque()
+for k in range(H):  # 3차원 입력
+    tmp = []
+    for i in range(N):
+        tmp.append(list(map(int, sys.stdin.readline().split())))
+        for j in range(M):
+            if tmp[i][j] == 1:
+                queue.append((i, j, k))
+    arr.append(tmp)
+
+# 알고리즘
+dx = [1, -1, 0, 0, 0, 0]
+dy = [0, 0, 1, -1, 0, 0]
+dz = [0, 0, 0, 0, 1, -1]
+
+while queue:
+    x, y, z = queue.popleft()
+    for i in range(6):
+        nx = x + dx[i]
+        ny = y + dy[i]
+        nz = z + dz[i]
+        if nx < 0 or nx >= N or ny < 0 or ny >= M or nz < 0 or nz >= H:
+            continue
+        if arr[nz][nx][ny] == 0:
+            arr[nz][nx][ny] = arr[z][x][y] + 1
+            queue.append((nx, ny, nz))
+
+# 출력
+result = 0
+for i in arr:
+    for j in i:
+        for k in j:
+            if k == 0:
+                print(-1)
+                exit(0)
+            if result < k:
+                result = k
+print(result - 1)
