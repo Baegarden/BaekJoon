@@ -1,0 +1,52 @@
+# Baekjoon 2206 : 벽 부수고 이동하기
+from collections import deque
+
+# 입력
+N, M = map(int, input().split())
+arr = []
+for i in range(N):
+    arr.append(list(map(int, input())))
+
+# 알고리즘 / 출력
+visited = [[[0 for _ in range(M)] for _ in range(N)] for _ in range(2)]
+dx = [0, 0, 1, -1]
+dy = [1, -1, 0, 0]
+queue = deque()
+
+# 시작점이 완료점인 경우
+if N == 1 and M == 1 and arr[0][0] == 0:
+    print(1)
+else:
+    visited[0][0][0] = 1
+    queue.append([0, 0, 0])
+    flag = 0
+    while queue:
+        x, y, z = queue.popleft()
+
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+
+            # 범위안에 들어옴
+            if 0 <= nx < N and 0 <= ny < M and visited[z][nx][ny] == 0:
+
+                # 벽을 만났는데 아직 벽을 안뚫어봄 ★
+                if arr[nx][ny] == 1 and z == 0:
+                    visited[1][nx][ny] = visited[0][x][y] + 1
+                    queue.append([nx, ny, 1])
+
+                # 벽 안만남 (길을 만난 경우)
+                elif arr[nx][ny] == 0:
+                    visited[z][nx][ny] = visited[z][x][y] + 1
+                    queue.append([nx, ny, z])
+
+                # 도착한 경우
+                if nx == N-1 and ny == M-1:
+                    print(visited[z][nx][ny])
+                    flag = 1
+                    break
+        if flag == 1:
+            break
+    if flag == 0:
+        print(-1)
+
