@@ -1,0 +1,46 @@
+# Baekjoon 1707 : 이분 그래프
+from collections import deque
+import sys
+
+# 입력
+input = sys.stdin.readline
+T = int(input())
+
+# 알고리즘
+
+def bfs(start):
+    bi[start] = 1
+    q = deque()
+    q.append(start)
+    while q:
+        a = q.popleft()
+        for i in arr[a]:
+            if bi[i] == 0:
+                bi[i] = -bi[a]
+                q.append(i)
+            else:
+                if bi[i] == bi[a]:
+                    return False
+    return True
+
+
+for i in range(T):
+    V, E = map(int, input().split())
+    arr = [[] for i in range(V + 1)]
+    bi = [0 for i in range(V + 1)]
+    for j in range(E):
+        a, b = map(int, input().split())
+        arr[a].append(b)
+        arr[b].append(a)
+
+    # 출력
+    flag = True
+    for j in range(1, V+1):
+        if bi[j] == 0:
+            if not bfs(j):
+                flag = False
+                break
+    if flag:
+        print("YES")
+    else:
+        print("NO")
