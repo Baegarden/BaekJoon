@@ -26,7 +26,7 @@ def dfs(x, y):
             nx = x + dx[i]
             ny = y + dy[i]
             dfs(nx, ny)
-        return True
+        return True     # 단지를 찾음
     return False
 
 # 출력
