@@ -50,3 +50,5 @@ else:
     if flag == 0:
         print(-1)
 
+# 참고
+https://yuuj.tistory.com/94
