@@ -1,0 +1,28 @@
+# Baekjoon 3273 : 두 수의 합
+import sys
+
+# 입력
+input = sys.stdin.readline
+N = int(input())
+arr = list(map(int, input().split()))
+arr.sort()
+X = int(input())
+
+# 알고리즘
+st = 0
+en = N-1
+count = 0
+
+while st < en:
+    sum = arr[st] + arr[en]
+    if sum == X:
+        count += 1
+        st += 1
+    elif sum < X:
+        st += 1
+    else:
+        en -= 1
+
+
+# 출력
+print(count)
