@@ -1,0 +1,29 @@
+# Baekjoon 1806 : 부분합
+import sys
+
+# 입력
+input = sys.stdin.readline
+N, S = map(int, input().split())
+arr = list(map(int, input().split()))
+
+# 알고리즘
+st, en = 0, 0
+sum = 0
+minCount = sys.maxsize
+
+while True:
+    if sum >= S:
+        minCount = min(minCount, en - st)
+        sum -= arr[st]
+        st += 1
+    elif en == N:
+        break
+    else:
+        sum += arr[en]
+        en += 1
+
+# 출력
+if minCount == sys.maxsize:
+    print(0)
+else:
+    print(minCount)
