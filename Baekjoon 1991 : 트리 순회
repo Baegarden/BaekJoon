@@ -1,0 +1,43 @@
+# Baekjoon 1991 : 트리 순회
+from collections import deque
+import sys
+
+# 입력
+input = sys.stdin.readline
+N = int(input())
+arr = {}
+for i in range(N):
+    a, b, c = input().split()
+    arr[a] = [b, c]
+
+# 알고리즘
+def preOrder(root):
+    print(root, end="")
+    if arr[root][0] != '.':
+        preOrder(arr[root][0])
+    if arr[root][1] != '.':
+        preOrder(arr[root][1])
+
+
+def inOrder(root):
+    if arr[root][0] != '.':
+        inOrder(arr[root][0])
+    print(root, end="")
+    if arr[root][1] != '.':
+        inOrder(arr[root][1])
+
+
+def postOrder(root):
+    if arr[root][0] != '.':
+        postOrder(arr[root][0])
+    if arr[root][1] != '.':
+        postOrder(arr[root][1])
+    print(root, end="")
+
+
+# 출력
+preOrder('A')
+print()
+inOrder('A')
+print()
+postOrder('A')
