@@ -1,0 +1,28 @@
+# Baekjoon 11725 : 트리의 부모 찾기
+from collections import deque
+import sys
+
+# 입력
+input = sys.stdin.readline
+N = int(input())
+
+# 알고리즘
+arr = [[]for i in range(N+1)]
+for i in range(N-1):
+    a, b = map(int, input().split())
+    arr[a].append(b)
+    arr[b].append(a)
+
+parent = [0 for i in range(N+1)]
+queue = deque()
+queue.append(1)
+while queue:
+    a = queue.popleft()
+    for i in arr[a]:
+        if parent[i] == 0:
+            parent[i] = a
+            queue.append(i)
+
+# 출력
+for i in range(2, N+1):
+    print(parent[i])
