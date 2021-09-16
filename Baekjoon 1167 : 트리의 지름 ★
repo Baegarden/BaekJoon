@@ -1,0 +1,38 @@
+# Baekjoon 1167 : 트리의 지름
+from collections import deque
+import sys
+
+# 입력
+input = sys.stdin.readline
+V = int(input())
+arr = [[] for i in range(V + 1)]
+for i in range(V):
+    a = list(map(int, input().split()))
+    for j in range(1, len(a) - 2, 2):
+        arr[a[0]].append([a[j], a[j + 1]])
+
+# 알고리즘
+
+
+def bfs(start):
+    visit = [-1 for i in range(V+1)]
+    visit[start] = 0
+    queue = deque()
+    queue.append(start)
+    farNode = [0, 0]
+    while queue:
+        a = queue.popleft()
+        for end, weight in arr[a]:
+            if visit[end] == -1:
+                visit[end] = visit[a] + weight
+                queue.append(end)
+                if farNode[0] < visit[end]:
+                    farNode[0] = visit[end]
+                    farNode[1] = end
+    return farNode
+
+
+# 출력
+distance, mostFarNode = bfs(1)
+distance, mostFarNode = bfs(mostFarNode)
+print(distance)
