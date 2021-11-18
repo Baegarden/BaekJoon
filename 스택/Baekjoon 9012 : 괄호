@@ -1,32 +1,20 @@
 # Baekjoon 9012 : 괄호
-
-# 입력
 N = int(input())
-result = []
-
-# 알고리즘
-def isVPS(str1):
-    pos = 0
-    for i in range(len(str1)):
-        if pos < 0:
-            return False
-        if str1[i] == '(':
-            pos += 1
-        else:
-            pos -= 1
-    if pos == 0:
-        return True
-    else:
-        return False
-
-
 for i in range(N):
-    s = input()
-    if isVPS(s) == True:
-        result.append("YES")
-    else:
-        result.append("NO")
+    arr = list(map(str, input()))
+    arr1, arr2 = 0, 0
+    for i in arr:
+        if i == '(':
+            arr1 += 1
+        else:
+            arr2 += 1
 
-# 출력
-for i in result:
-    print(i)
+        if arr2 > arr1:
+            print('NO')
+            break
+    else:
+        if arr1 == arr2:
+            print('YES')
+        elif arr1 > arr2:
+            print('NO')
+
