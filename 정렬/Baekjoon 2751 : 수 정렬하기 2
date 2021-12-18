@@ -1,0 +1,14 @@
+# Baekjoon 2751 : 수 정렬하기 2
+
+# 입력
+N = int(input())
+arr = []
+for i in range(N):
+    arr.append(int(input()))
+
+# 알고리즘
+arr.sort()
+
+# 출력
+for i in arr:
+    print(i)
