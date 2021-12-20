@@ -1,0 +1,23 @@
+# Baekjoon 10989 : 수 정렬하기 3
+
+import sys
+
+# 입력
+N = int(sys.stdin.readline())
+
+# 알고리즘
+arr = [0 for i in range(10001)]
+
+# 출력
+
+# 계수정렬
+for i in range(N):
+    i = int(sys.stdin.readline())
+    arr[i] += 1
+
+for i in range(10001):
+    if arr[i] != 0:
+        for j in range(arr[i]):
+            print(i)
+            
+참고 : https://assaeunji.github.io/python/2020-05-05-bj10989/
