@@ -1,0 +1,10 @@
+# Baekjoon 1427 : 소트인사이드
+
+# 입력
+N = list(map(str, input()))
+
+# 알고리즘
+N.sort(reverse=True)
+
+# 출력
+print(''.join(N))
