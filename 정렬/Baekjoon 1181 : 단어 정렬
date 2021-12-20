@@ -1,0 +1,17 @@
+# Baekjoon 1181 : 단어 정렬
+
+# 입력
+N = int(input())
+arr = []
+for i in range(N):
+    arr.append(input())
+
+# 알고리즘
+result_a = sorted(arr, key=lambda x: (len(x), x))
+
+# 출력
+visit = []
+for i in result_a:
+    if i not in visit:
+        visit.append(i)
+        print(i)
