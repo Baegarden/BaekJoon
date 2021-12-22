@@ -1,0 +1,14 @@
+# Baekjoon 11650 : 좌표 정렬하기
+
+# 입력
+N = int(input())
+arr = []
+for i in range(N):
+    arr.append(list(map(int, input().split(" "))))
+
+# 알고리즘
+answer = sorted(arr, key=lambda x: (x[0], x[1]))
+
+# 출력
+for i in answer:
+    print(i[0], i[1])
