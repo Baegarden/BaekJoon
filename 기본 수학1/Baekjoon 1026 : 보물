@@ -1,0 +1,18 @@
+# Baekjoon 1026 : 보물
+
+# 입력
+N = int(input())
+arrA = list(map(int, input().split()))
+arrB = list(map(int, input().split()))
+
+# 알고리즘
+answer = 0
+for i in range(N):
+    minNumA = min(arrA)
+    maxNumB = max(arrB)
+    arrA[arrA.index(minNumA)] = 101
+    arrB[arrB.index(maxNumB)] = -1
+    answer += minNumA * maxNumB
+
+# 출력
+print(answer)
