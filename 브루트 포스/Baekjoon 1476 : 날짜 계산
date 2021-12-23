@@ -1,0 +1,22 @@
+# Baekjoon 1476 : 날짜 계산
+
+# 입력
+ESM = list(map(int, input().split()))
+
+# 알고리즘
+arr = [1, 1, 1]
+answer = 1
+while ESM != arr:
+    arr[0] += 1
+    arr[1] += 1
+    arr[2] += 1
+    if arr[0] > 15:
+        arr[0] = 1
+    if arr[1] > 28:
+        arr[1] = 1
+    if arr[2] > 19:
+        arr[2] = 1
+    answer += 1
+
+# 출력
+print(answer)
