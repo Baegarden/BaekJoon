@@ -1,0 +1,36 @@
+# Baekjoon 2108 : 통계학
+
+import sys
+
+# 입력
+N = int(sys.stdin.readline())
+arr = []
+for i in range(N):
+    arr.append(int(sys.stdin.readline()))
+
+# 알고리즘
+answer_1 = round(sum(arr)/N)    # 산술평균
+arr.sort()
+answer_2 = arr[N//2]    # 중앙값
+arr2 = {}   # 최빈값
+for i in arr:
+    if i in arr2:
+        arr2[i] = arr2.get(i) + 1
+    else:
+        arr2[i] = 1
+answer_3 = []
+maxNum = max(arr2.values())
+for i in arr2.keys():
+    if arr2[i] == maxNum:
+        answer_3.append(i)
+answer_3.sort()
+answer_4 = arr[N-1] - arr[0]  # 범위
+
+# 출력
+print(answer_1)
+print(answer_2)
+if len(answer_3) == 1:
+    print(answer_3[0])
+else:
+    print(answer_3[1])
+print(answer_4)
