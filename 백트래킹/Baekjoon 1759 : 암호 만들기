@@ -1,0 +1,34 @@
+# Baekjoon 1759 : 암호 만들기
+
+# 입력
+L, C = map(int, input().split())
+arrInput = list(map(str, input().split()))
+arrInput.sort()
+answer = []
+
+# 알고리즘
+def BT(arr):
+    if len(arr) == L:
+        answer.append(arr)
+        return
+
+    idx = len(arr) - 1
+    for i in arrInput:
+        if i not in arr and arr[idx] < i:
+            BT(arr + [i])
+
+for i in arrInput:
+    BT([i])
+
+# 출력
+tmp = ['a', 'e', 'i', 'o', 'u']
+for i in answer:
+    flag = 0
+    count = 0
+    for j in tmp:
+        if j in i:
+            flag = 1
+            count += 1
+    if flag == 0 or len(i) - count < 2:
+        continue
+    print(''.join(i))
