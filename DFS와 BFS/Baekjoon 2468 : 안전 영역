@@ -1,4 +1,4 @@
-# Baekjoon 1759 : 암호 만들기
+# Baekjoon 2468 : 안전 영역
 from collections import deque
 
 # 입력
