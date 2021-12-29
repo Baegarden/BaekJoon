@@ -1,0 +1,22 @@
+# Baekjoon 14501 : 퇴사
+
+# 입력
+N = int(input())
+arrPeriod = []
+arrCost = []
+dp = [0 for i in range(N+1)]
+for i in range(N):
+    a, b = map(int, input().split())
+    arrPeriod.append(a)
+    arrCost.append(b)
+
+
+# 알고리즘
+for i in range(N-1, -1, -1):
+    if i + arrPeriod[i] > N:
+        dp[i] = dp[i+1]
+    else:
+        dp[i] = max(arrCost[i] + dp[i + arrPeriod[i]], dp[i+1])
+
+# 출력
+print(dp[0])
