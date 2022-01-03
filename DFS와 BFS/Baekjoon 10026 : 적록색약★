@@ -1,0 +1,55 @@
+# Baekjoon 10026 : 적록색약
+
+from collections import deque
+import copy
+
+# 입력
+N = int(input())
+arr = []
+for i in range(N):
+    arr.append(list(map(str, input())))
+
+# 알고리즘
+dx = [0, 0, 1, -1]
+dy = [1, -1, 0, 0]
+
+def bfs(i, j):
+    queue = deque()
+    queue.append([i, j])
+    isVisit[i][j] = 1
+    while queue:
+        x, y = queue.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+
+            if nx < 0 or nx >= N or ny < 0 or ny >= N:
+                continue
+
+            if arr[nx][ny] == arr[x][y] and isVisit[nx][ny] == 0:
+                isVisit[nx][ny] = 1
+                queue.append([nx, ny])
+
+isVisit = [[0 for i in range(N)] for i in range(N)]     # 적록색약 X
+answer1 = 0
+for i in range(N):
+    for j in range(N):
+        if isVisit[i][j] == 0:
+            bfs(i, j)
+            answer1 += 1
+
+for i in range(N):      # 적록색약 버전으로 바꿔주기
+    for j in range(N):
+        if arr[i][j] == 'G':
+            arr[i][j] = 'R'
+
+isVisit = [[0 for i in range(N)] for i in range(N)]     #적록색약 O
+answer2 = 0
+for i in range(N):
+    for j in range(N):
+        if isVisit[i][j] == 0:
+            bfs(i, j)
+            answer2 += 1
+
+# 출력
+print(answer1, answer2)
