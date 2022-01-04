@@ -1,0 +1,40 @@
+# Baekjoon 1987 : 알파벳
+
+import sys
+
+# 입력
+input = sys.stdin.readline
+R, C = map(int, input().split())
+board = []
+for i in range(R):
+    board.append(list(input()))
+
+# 알고리즘
+dx = [1, -1, 0, 0]
+dy = [0, 0, 1, -1]
+maxNum = 0
+visited = set()
+visited.add(board[0][0])
+
+
+def dfs(x, y, count):
+    global maxNum
+
+    maxNum = max(count, maxNum)
+
+    for i in range(4):
+        nx = x + dx[i]
+        ny = y + dy[i]
+
+        if nx < 0 or nx >= R or ny < 0 or ny >= C:
+            continue
+
+        if board[nx][ny] not in visited:
+            visited.add(board[nx][ny])
+            dfs(nx, ny, count + 1)
+            visited.remove(board[nx][ny])
+
+
+# 출력
+dfs(0, 0, 1)
+print(maxNum)
