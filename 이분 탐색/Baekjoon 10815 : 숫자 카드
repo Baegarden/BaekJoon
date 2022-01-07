@@ -1,0 +1,29 @@
+# Baekjoon 10815 : 숫자 카드
+
+# 입력
+N = int(input())
+arrA = list(map(int, input().split(" ")))
+M = int(input())
+arrB= list(map(int, input().split(" ")))
+
+# 알고리즘
+arrA.sort()
+def binarySearch(target):
+    st = 0
+    en = len(arrA) - 1
+    while st <= en:
+        mid = (st + en) // 2
+        if arrA[mid] < target:
+            st = mid + 1
+        elif arrA[mid] > target:
+            en = mid - 1
+        else:
+            return 1
+    return 0
+
+# 출력
+for i in arrB:
+    if binarySearch(i):
+        print(1, end=" ")
+    else:
+        print(0, end=" ")
