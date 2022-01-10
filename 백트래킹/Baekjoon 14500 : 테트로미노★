@@ -1,0 +1,47 @@
+# Baekjoon 14500 : 테트로미노
+
+# 입력
+import sys 
+input = sys.stdin.readline
+N, M = map(int, input().split())
+arr = []
+for i in range(N):
+    arr.append(list(map(int, input().split())))
+
+# 알고리즘
+visit = [[0 for i in range(M)] for i in range(N)]
+dx = [1, -1, 0, 0]
+dy = [0, 0, 1, -1]
+answser = 0
+maxNum = max(map(max, arr))
+
+def dfs(x, y, idx, total):
+    global answser
+    if answser >= total + maxNum * (3 - idx):
+        return
+    if idx == 3:
+        answser = max(answser, total)
+        return
+    else:
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if 0 <= nx < N and 0 <= ny < M and visit[nx][ny] == 0:
+                if idx == 1:            # 'ㅗ' 모양 만들기 위해
+                    visit[nx][ny] = 1
+                    dfs(x, y, idx + 1, total + arr[nx][ny])
+                    visit[nx][ny] = 0
+                visit[nx][ny] = 1
+                dfs(nx, ny, idx + 1, total + arr[nx][ny])
+                visit[nx][ny] = 0
+
+for i in range(N):
+    for j in range(M):
+        visit[i][j] = 1
+        dfs(i, j, 0, arr[i][j])
+        visit[i][j] = 0     
+
+# 출력
+print(answser)
+
+참고 : https://velog.io/@jajubal/파이썬백준-14500-테트로미노
