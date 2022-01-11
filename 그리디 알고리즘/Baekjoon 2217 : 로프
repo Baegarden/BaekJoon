@@ -1,0 +1,16 @@
+# Baekjoon 2217 : 로프
+
+# 입력
+N = int(input())
+arr = []
+for i in range(N):
+    arr.append(int(input()))
+
+# 알고리즘
+arr.sort(reverse=True)
+answer = 0
+for i in range(N):
+    answer = max(answer, arr[i] * (i+1))
+
+# 출력
+print(answer)
