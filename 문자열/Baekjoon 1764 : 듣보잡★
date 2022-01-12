@@ -1,0 +1,19 @@
+# Baekjoon 1764 : 듣보잡
+
+# 입력
+import sys
+N, M = map(int, input().split())
+
+# 알고리즘
+arrA, arrB = set(), set()
+for i in range(N):
+    arrA.add(input())
+for i in range(M):
+    arrB.add(input())   
+
+answer = sorted(list(arrA & arrB))
+
+# 출력
+print(len(answer))
+for i in answer:
+    print(i)
