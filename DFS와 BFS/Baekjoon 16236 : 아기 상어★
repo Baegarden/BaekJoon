@@ -1,0 +1,72 @@
+# Baekjoon 16236 : 아기 상어
+
+from collections import deque
+from stringprep import b1_set
+
+# 입력
+N = int(input())
+arr = []
+for i in range(N):
+    arr.append(list(map(int, input().split())))
+
+# 알고리즘
+dx = [0, 0, 1, -1]
+dy = [1, -1, 0, 0]
+
+sx, sy = 0, 0
+for i in range(N):
+    for j in range(N):
+        if arr[i][j] == 9:
+            arr[i][j] = 0
+            sx, sy = i, j
+            break
+
+sharkSize = 2
+numEated = 0
+numMove = 0
+while True:
+    visit = [[0 for i in range(N)] for i in range(N)]
+    queue = deque()
+    queue.append([sx, sy, 0])
+    minNum = 1e9
+    possibleEat = []
+    while queue:
+        x, y, moved = queue.popleft()
+
+        if moved > minNum:
+            break
+
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+
+            if nx < 0 or nx >= N or ny < 0 or ny >= N:
+                continue
+
+            if arr[nx][ny] > sharkSize or visit[nx][ny] == 1:
+                continue
+
+            if arr[nx][ny] != 0 and arr[nx][ny] < sharkSize:
+                possibleEat.append([nx, ny, moved + 1])
+                minNum = moved
+            visit[nx][ny] = 1
+            queue.append([nx, ny, moved + 1])    
+    
+    # 가장 가까운 물고기 먹기
+    if possibleEat:
+        possibleEat.sort()
+        a, b, distance = possibleEat[0][0], possibleEat[0][1], possibleEat[0][2]
+        numMove += distance
+        numEated += 1
+        arr[a][b] = 0
+        if numEated == sharkSize:
+            sharkSize += 1
+            numEated = 0
+        sx, sy = a, b
+    else:
+        break        
+
+
+# 출력
+print(numMove)
+
