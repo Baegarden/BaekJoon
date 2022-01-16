@@ -1,0 +1,18 @@
+# Baekjoon 1107 : 리모컨
+
+# 입력
+target = int(input())
+M = int(input())
+if M: 
+    troubled = list(input().split(" "))
+else:
+    troubled = []
+
+ans = abs(100 - target)
+for num in range(1000001): 
+    for N in str(num):  # 해당 숫자를 누를 수 있는지
+        if N in troubled: 
+            break
+    else:   # 고장난 버튼없이 해당 숫자를 누를 수 있다면
+        ans = min(ans, len(str(num)) + abs(num - target))
+print(ans)
