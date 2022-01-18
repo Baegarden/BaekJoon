@@ -1,0 +1,29 @@
+# Baekjoon 10819 : 차이를 최대로 
+
+# 입력
+N = int(input())
+arr = list(map(int, input().split(" ")))
+
+# 알고리즘
+sequence, answer = [], []
+visit = [0 for i in range(N)] 
+
+def backtracking(depth):
+    if depth == N:
+        result = 0
+        for i in range(N-1):
+            result += abs(sequence[i+1] - sequence[i])
+        answer.append(result)
+        return ;
+    for i in range(N):
+        if visit[i] == 0:
+            sequence.append(arr[i])
+            visit[i] = 1
+            backtracking(depth + 1)
+            sequence.pop()
+            visit[i] = 0
+  
+# 출력
+backtracking(0)
+print(max(answer))
+
