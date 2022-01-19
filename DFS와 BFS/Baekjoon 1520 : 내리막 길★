@@ -1,0 +1,40 @@
+# Baekjoon 1520 : 내리막 길
+
+import sys
+
+# 입력
+input = sys.stdin.readline
+N, M = map(int, input().split())
+arr = []
+for i in range(N):
+    arr.append(list(map(int, input().split(" "))))
+
+# 알고리즘
+dx = [0, 0, 1, -1]
+dy = [1, -1, 0, 0]
+visited = [[-1 for i in range(M)] for i in range(N)]
+
+def dfs(x, y):
+    global answer 
+    if x == N-1 and y == M-1:
+        return 1
+    if visited[x][y] != -1:
+        return visited[x][y]
+    visited[x][y] = 0
+
+    for i in range(4):
+        nx = x + dx[i]
+        ny = y + dy[i]
+        
+        if nx < 0 or nx >= N or ny < 0 or ny >= M:
+            continue
+
+        if arr[nx][ny] < arr[x][y]:
+            visited[x][y] += dfs(nx, ny)
+
+    return visited[x][y]
+
+# 출력
+print(dfs(0, 0))
+
+- 문제 좋다... -
