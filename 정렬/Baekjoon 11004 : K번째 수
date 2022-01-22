@@ -1,0 +1,11 @@
+# Baekjoon 11004 : K번째 수 
+
+# 입력
+N, K = map(int, input().split(" "))
+arr = list(map(int, input().split(" ")))
+
+# 알고리즘
+arr.sort()
+
+# 출력
+print(arr[K-1])
