@@ -1,0 +1,15 @@
+# Baekjoon 10825 : 국영수
+
+# 입력
+N = int(input())
+arr = []
+for i in range(N):
+    arr.append(list(input().split(" ")))
+
+# 알고리즘
+result = sorted(arr, key=lambda x: (-int(x[1]), int(x[2]), -int(x[3]), x[0]))
+
+# 출력
+for i in result:
+    print(i[0])
+
