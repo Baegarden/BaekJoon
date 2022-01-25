@@ -1,0 +1,14 @@
+# Baekjoon 18870 : 좌표 압축
+
+# 입력
+N = int(input())
+arr = list(map(int, input().split(" ")))
+
+# 알고리즘
+newSet = set(arr)
+newArr = sorted(list(newSet))
+answer = {newArr[i] : i for i in range(len(newArr))}
+
+# 출력
+for i in arr:
+    print(answer[i], end=" ")
