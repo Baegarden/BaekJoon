@@ -1,0 +1,14 @@
+# Baekjoon 11656 : 접미사 배열
+
+# 입력
+S = input()
+arr = []
+for i in range(len(S)):
+    arr.append(S[i:])
+
+# 알고리즘
+arr.sort()
+
+# 출력
+for i in arr:
+    print(i)
