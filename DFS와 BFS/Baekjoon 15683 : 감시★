@@ -1,0 +1,58 @@
+# Baekjoon 15683 : 감시
+
+import copy
+
+# 입력
+N, M = map(int, input().split(" "))
+firstArr = []
+cctv = []
+countCctv = 0
+answer = int(1e9)
+for i in range(N):
+    firstArr.append(list(map(int, input().split(" "))))
+    for j in range(M):
+        if firstArr[i][j] != 0 and firstArr[i][j] != 6:
+            countCctv += 1
+            cctv.append([i, j, firstArr[i][j]])
+
+
+# 알고리즘
+dx = [1, -1, 0, 0]      # 동서남북 
+dy = [0, 0, 1, -1]
+direction = [[], [[0], [1], [2], [3]], [[0, 1], [2, 3]], [[0, 2], [2, 1], [1, 3], [3, 0]],      # CCTV 1 ~ 5의 경우의 수 
+             [[3, 0, 2], [1, 3, 0], [0, 2, 1], [2, 1, 3]], [[0, 1, 2, 3]]]
+
+def observe(arr, x, y, direction):  # cctv별 사각지대 계산
+    for i in direction:
+        nx = x
+        ny = y
+        while True:
+            nx += dx[i]
+            ny += dy[i]
+            
+            if nx >= 0 and nx < N and ny >= 0 and ny < M and arr[nx][ny] != 6:
+                if arr[nx][ny] == 0:
+                    arr[nx][ny] = '#'
+            else:
+                break
+
+def dfs(arr, count):    # cctv별 조합에 따른 사각지대 계산
+    global answer 
+
+    tmp = copy.deepcopy(arr)
+    if count == countCctv:      # 모든 cctv의 경우를 계산 후 최소크기인지 확인
+        numZero = 0
+        for i in tmp:
+            numZero += i.count(0)
+        answer = min(answer, numZero)
+        return 
+
+    x, y, numCctv = cctv[count]
+    for i in direction[numCctv]:
+        observe(tmp, x, y, i)
+        dfs(tmp, count + 1)
+        tmp = copy.deepcopy(arr)    # 초기화
+
+# 출력
+dfs(firstArr, 0)
+print(answer)
