@@ -1,0 +1,62 @@
+# Baekjoon 3055 : 탈출
+
+from collections import deque
+
+# 입력
+N, M = map(int, input().split(" "))
+arr = []
+waterQueue = deque()
+dochiQueue = deque()
+for i in range(N):
+    arr.append(list(input()))
+    for j in range(M):
+        if arr[i][j] == '*':
+            waterQueue.append([i, j])
+        elif arr[i][j] == 'S':
+            dochiQueue.append([i, j])
+            
+# 알고리즘
+dx = [1, -1, 0, 0]     
+dy = [0, 0, 1, -1]
+
+time = 0
+while True:
+    flag = 0    # 살아있는지
+    time += 1
+
+    newWaterQueue = deque()     # 물 먼저 이동
+    while waterQueue:
+        x, y = waterQueue.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if nx < 0 or nx >= N or ny < 0 or ny >= M:
+                continue
+            if arr[nx][ny] == '.':
+                arr[nx][ny] = '*'
+                newWaterQueue.append((nx, ny))
+    waterQueue = newWaterQueue
+
+    newdochiQueue = deque()     # 물을 피해 고슴도치 이동
+    while dochiQueue:
+        x, y = dochiQueue.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if nx < 0 or nx >= N or ny < 0 or ny >= M:
+                continue
+            if arr[nx][ny] == '.':
+                arr[nx][ny] = 'S'
+                newdochiQueue.append((nx, ny))
+                flag = 1    # 아직 살아있다!
+            if arr[nx][ny] == 'D':
+                arr[nx][ny] = 'S'
+                print(time)
+                exit()
+    dochiQueue = newdochiQueue
+
+    if flag == 0:   # 주겄다..
+        print('KAKTUS')
+        exit()
+
+
