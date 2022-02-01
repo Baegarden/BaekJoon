@@ -1,0 +1,18 @@
+# Baekjoon 1057 : 토너먼트
+
+import math
+# 입력
+N, kim, im = map(int, input().split(" "))
+
+# 알고리즘
+answer = -1
+numRound = 1
+while N > 1:
+    N = math.ceil(N / 2)
+    kim = math.ceil(kim / 2)
+    im = math.ceil(im / 2)
+    if kim == im:
+        answer = numRound
+        break
+    numRound += 1
+print(answer)
