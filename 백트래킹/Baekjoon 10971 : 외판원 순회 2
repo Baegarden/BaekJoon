@@ -1,0 +1,32 @@
+# Baekjoon 10971 : 외판원 순회 2
+
+# 입력
+N = int(input())
+arr = []
+for i in range(N):
+    arr.append(list(map(int, input().split(" "))))
+
+answer = float('inf')
+
+# 알고리즘
+def backTracking(visited, sumNum, depth):
+    global answer
+
+    if depth == N:
+        comebackNum = arr[visited[N-1] - 1][visited[0] - 1]
+        if comebackNum != 0:    # 다시 돌아올 수 있으면
+            answer = min(answer, sumNum + comebackNum)            
+        return   
+
+    if len(visited) == 0:   # 시작 지점
+        for i in range(1, N+1):
+            backTracking(visited + [i], sumNum, depth + 1)
+    else:
+        preNum = visited[depth-1]
+        for i in range(1, N+1):
+            if i not in visited and arr[preNum - 1][i - 1] != 0:
+                backTracking(visited + [i], sumNum + arr[preNum - 1][i - 1], depth + 1)
+
+# 출력
+backTracking([], 0, 0)
+print(answer)
