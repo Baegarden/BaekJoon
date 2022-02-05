@@ -1,0 +1,78 @@
+# Baekjoon 2573 : 빙산
+
+import copy
+from collections import deque
+
+# 입력
+N, M = map(int, input().split(" "))
+arr = []
+for i in range(N):
+    arr.append(list(map(int, input().split(" "))))
+
+# 알고리즘
+dx = [1, -1, 0, 0]
+dy = [0, 0, 1, -1]
+
+def melt(x, y):
+    for i in range(4):
+        nx = x + dx[i]
+        ny = y + dy[i]
+
+        if nx < 0 or nx >= N or ny < 0 or ny >= M:
+            continue
+
+        if arr[nx][ny] == 0:
+            tmp[x][y] -= 1  
+
+def bfs(a, b):
+    queue = deque()
+    queue.append([a, b])
+    while queue:
+        x, y = queue.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+
+            if nx < 0 or nx >= N or ny < 0 or ny >= M:
+                continue
+
+            if visit[nx][ny] != 0:
+                visit[nx][ny] = 0  
+                queue.append([nx, ny])
+
+# 출력
+year = 0
+while True:
+    # 다 녹았는지 확인
+    maxNum = 0
+    for i in arr:
+        maxNum = max(maxNum, max(i))
+    if maxNum == 0:
+        print(0)
+        break
+    
+    # 빙산 덩어리 수 계산하기
+    countArea = 0 
+    visit = copy.deepcopy(arr)
+    for i in range(N):
+        for j in range(M):
+            if visit[i][j] != 0:
+                visit[i][j] = 0
+                bfs(i, j)
+                countArea += 1
+    if countArea > 1:
+        print(year)
+        break  
+
+    # 녹는 과정 진행
+    tmp = copy.deepcopy(arr)
+    for i in range(N):
+        for j in range(M):
+            if arr[i][j] != 0:
+                melt(i, j)
+            if tmp[i][j] < 0:
+                tmp[i][j] = 0
+    arr = copy.deepcopy(tmp)
+    year += 1
+
+           
