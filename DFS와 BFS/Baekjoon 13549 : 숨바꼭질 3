@@ -1,0 +1,30 @@
+# Baekjoon 13549 : 숨바꼭질 3 
+
+from collections import deque
+
+# 입력
+N, K = map(int, input().split(" "))
+
+# 알고리즘
+queue = deque()
+queue.append([N, 0])
+visited = [0] * 100001
+visited[N] = 1
+while queue:
+    current, time = queue.popleft()
+    if current == K:
+        print(time)        
+        break
+
+    if current * 2 <= 100000:
+        if visited[current * 2] == 0:
+            visited[current * 2] = 1
+            queue.append([current * 2, time])
+    if current - 1 >= 0:
+        if visited[current - 1] == 0:
+            visited[current - 1] = 1
+            queue.append([current - 1, time + 1])
+    if current + 1 <= 100000:
+        if visited[current + 1] == 0:
+            visited[current + 1] = 1
+            queue.append([current + 1, time + 1])  
