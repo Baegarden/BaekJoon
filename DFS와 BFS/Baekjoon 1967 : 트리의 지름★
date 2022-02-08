@@ -1,0 +1,38 @@
+# Baekjoon 1967 : 트리의 지름
+
+from collections import deque
+import sys
+
+# 입력
+input = sys.stdin.readline
+N = int(input())
+arr = [[] for  i in range(N+1)]
+for i in range(N-1):
+    a, b, c = map(int, input().split(" "))
+    arr[a].append([b, c])
+    arr[b].append([a, c])
+    
+# 알고리즘
+def bfs(x):
+    queue = deque()
+    queue.append(x)
+    while queue:
+        a = queue.popleft()
+        for b, c in arr[a]:
+            if distance[b] == -1:
+                distance[b] = distance[a] + c
+                queue.append(b)
+
+# 1번 노드(root)에서 가장 먼 곳을 찾는다
+distance = [-1 for i in range(N+1)]
+distance[1] = 0
+bfs(1)
+
+# 위에서 찾은 노드에 대한 가장 먼 노드를 찾는다
+start = distance.index(max(distance))
+distance = [-1 for i in range(N+1)]
+distance[start] = 0
+bfs(start)
+
+# 출력
+print(max(distance))
