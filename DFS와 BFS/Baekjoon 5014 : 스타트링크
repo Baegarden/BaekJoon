@@ -1,0 +1,28 @@
+# Baekjoon 5014 : 스타트링크
+
+from collections import deque
+
+# 입력
+F, S, G, U, D = map(int, input().split())
+
+# 알고리즘
+visited = [0 for i in range(F+1)]
+queue = deque()
+queue.append([S, 0])
+visited[S] = 1
+while queue:
+    current, count = queue.popleft()
+
+    if current == G:
+        print(count)
+        break
+
+    if current + U <= F and visited[current + U] == 0:
+        visited[current + U] = 1
+        queue.append([current + U, count + 1])
+    
+    if current - D >= 1 and visited[current - D] == 0:
+        visited[current - D] = 1
+        queue.append([current - D, count + 1])
+else:
+    print('use the stairs')
