@@ -1,4 +1,4 @@
-# Baekjoon 1520 : 내리막 길
+# Baekjoon 1520 : 내리막 길 (DP + dfs로 'Baekjoon 1937 욕심쟁이 판다' 문제와 유사) 
 
 import sys
 
