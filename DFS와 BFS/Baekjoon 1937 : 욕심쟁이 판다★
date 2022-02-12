@@ -1,0 +1,33 @@
+# Baekjoon 1937 : 욕심쟁이 판다
+from collections import deque
+
+# 입력
+N = int(input())
+arr = []
+for i in range(N):
+    arr.append(list(map(int, input().split())))
+
+# 알고리즘
+dp = [[0 for i in range(N)] for i in range(N)]
+dx = [1, -1, 0, 0]
+dy = [0, 0, -1, 1]
+def dfs(x, y):
+    if dp[x][y]: 
+        return dp[x][y]     # 이미 지나온(파생된) 지점(파생된 지점은 1일 테니까)
+    dp[x][y] = 1
+    for i in range(4):
+        nx = x + dx[i]
+        ny = y + dy[i]
+        if nx < 0 or nx >= N or ny < 0 or ny >= N:
+            continue
+        
+        if arr[x][y] < arr[nx][ny]:
+            dp[x][y] = max(dp[x][y], dfs(nx, ny) + 1)
+    return dp[x][y]
+
+# 출력
+result = 0
+for i in range(N):
+    for j in range(N):
+        result = max(result, dfs(i, j))
+print(result)
