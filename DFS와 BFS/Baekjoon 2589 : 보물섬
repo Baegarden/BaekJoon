@@ -1,0 +1,41 @@
+# Baekjoon 2589 : 보물섬
+from collections import deque
+
+# 입력
+N, M = map(int, input().split())
+arr = []
+for i in range(N):
+    arr.append(list(map(str, input())))
+
+# 알고리즘
+dx = [1, -1, 0, 0]
+dy = [0, 0, 1, -1]
+answer = 0
+
+def bfs(a, b):
+    global answer
+    visited = [[0 for i in range(M)] for j in range(N)]
+    visited[a][b] = 1
+    queue = deque()
+    queue.append([a, b, 0])
+    while queue:
+        x, y, time = queue.popleft()
+        answer = max(answer, time)
+    
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+
+            if nx < 0 or nx >= N or ny < 0 or ny >= M:
+                continue
+
+            if arr[nx][ny] == 'L' and visited[nx][ny] == 0:
+                visited[nx][ny] = 1
+                queue.append([nx, ny, time + 1])
+            
+# 출력
+for i in range(N):
+    for j in range(M):
+        if arr[i][j] == 'L':
+            bfs(i, j)
+print(answer)
