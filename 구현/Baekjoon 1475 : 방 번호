@@ -1,0 +1,20 @@
+# Baekjoon 1475 : 방 번호
+
+# 입력
+N = input()
+
+# 알고리즘
+visit = [0 for i in range(10)]
+
+for i in N:
+    num = int(i)
+    if num == 6 or num == 9:
+        if visit[6] > visit[9]:
+            visit[9] += 1
+        else:
+            visit[6] += 1
+    else:
+        visit[num] += 1
+
+# 출력
+print(max(visit))
