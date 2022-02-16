@@ -1,0 +1,51 @@
+# Baekjoon 14503 : 로봇 청소기
+
+import copy
+
+# 입력
+N, M = map(int, input().split())
+r, c, d = map(int, input().split())
+arr = []
+for i in range(N):
+    arr.append(list(map(int, input().split())))
+
+
+# 알고리즘
+dx = [-1, 0, 1, 0]
+dy = [0, 1, 0, -1]
+visit = copy.deepcopy(arr)
+visit[r][c] = 1
+answer = 1
+turnCount = 0
+while True:   
+    # 2-a
+    nd = (d + 3) % 4 
+    left_r = r + dx[nd]
+    left_c = c + dy[nd]
+
+    if visit[left_r][left_c] == 0:
+        visit[left_r][left_c] = 1
+        answer += 1
+        d = nd
+        r = left_r
+        c = left_c 
+        turnCount = 0
+    # 2-b
+    else:
+        d = nd
+        turnCount += 1
+
+    # 2-c
+    if turnCount == 4:
+        back_r = r - dx[d]
+        back_c = c - dy[d]
+        if arr[back_r][back_c] == 0:
+            r = back_r
+            c = back_c
+            turnCount = 0
+        # 2-d
+        else:
+            break    
+
+# 출력
+print(answer)
