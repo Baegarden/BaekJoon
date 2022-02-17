@@ -1,0 +1,61 @@
+# Baekjoon 3190 : 뱀
+
+from collections import deque
+
+# 입력
+N = int(input())
+K = int(input())
+apple = []
+for i in range(K):
+    x, y = map(int, input().split(" "))
+    apple.append([x-1, y-1])
+    
+L = int(input())
+direction = deque()
+for i in range(L):
+    X, C = input().split(" ")
+    direction.append([int(X), C])
+
+# 알고리즘
+dx = [0, 1, 0, -1]  # 동 남 서 북 
+dy = [1, 0, -1, 0]
+
+queue = deque()
+queue.append([0, 0])
+x, y, d = 0, 0, 0
+time = 0
+
+while True:
+    time += 1   
+
+    # 머리를 다음칸에 위치시킨다
+    nx = x + dx[d]
+    ny = y + dy[d]
+
+    # 벽에 부딪힐 경우
+    if nx < 0 or nx >= N or ny < 0 or ny >= N:
+        break
+
+    # 자신의 몸과 부딪힐 경우
+    if [nx, ny] in queue:
+        break    
+    
+    # 이동한 후, 이동한 칸에 사과가 없다면 꼬리가 있는 칸을 비워준다
+    queue.append([nx, ny])
+    x, y = nx, ny
+    if [nx, ny] not in apple:
+        queue.popleft()
+    else:
+        apple.remove([nx, ny])
+
+    # 방향 변환할 때가 된 경우
+    if direction and time == direction[0][0]:
+        if direction[0][1] == 'D':
+            d += 1
+        else:
+            d -= 1    
+        d = (d + 4) % 4
+        direction.popleft()
+
+# 출력
+print(time)
