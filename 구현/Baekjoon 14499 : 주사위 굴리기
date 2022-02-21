@@ -1,0 +1,53 @@
+# Baekjoon 14499 : 주사위 굴리기
+
+from collections import deque
+
+# 입력
+N, M, x, y, K = map(int, input().split())
+arr = []
+for i in range(N):
+    arr.append(list(map(int, input().split())))
+order = list(map(int, input().split()))
+
+# 알고리즘
+diceCol = deque([0, 0, 0])
+diceRow = deque([0, 0, 0, 0])
+currentNum = 0
+
+dx = [0, 0, 0, -1, 1]   # 동서북남
+dy = [0, 1, -1, 0, 0]
+
+for i in order:
+    if x + dx[i] >= 0 and x + dx[i] < N and y + dy[i] >= 0 and y + dy[i] < M:
+        # 주사위를 굴린다
+        x = x + dx[i]
+        y = y + dy[i]
+
+        if i == 1:
+            currentNum = diceCol.pop()
+            diceCol.appendleft(diceRow.pop())
+            diceRow.append(currentNum)
+            diceRow[1] = diceCol[1]
+        elif i == 2:
+            currentNum = diceCol.popleft()
+            diceCol.append(diceRow.pop())
+            diceRow.append(currentNum)
+            diceRow[1] = diceCol[1]
+        elif i == 3:
+            currentNum = diceRow.popleft()
+            diceRow.append(currentNum)
+            diceCol[1] = diceRow[1]
+        else:
+            currentNum = diceRow.pop()
+            diceRow.appendleft(currentNum)
+            diceCol[1] = diceRow[1]
+
+        # 지도랑 값 비교
+        if arr[x][y] == 0:
+            arr[x][y] = currentNum
+        else:
+            diceRow[3] = arr[x][y]
+            arr[x][y] = 0
+
+        # 윗면 출력
+        print(diceCol[1])
