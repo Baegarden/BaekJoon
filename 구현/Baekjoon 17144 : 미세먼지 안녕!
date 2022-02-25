@@ -1,0 +1,73 @@
+# Baekjoon 17144 : 미세먼지 안녕!
+
+# 입력
+R, C, T = map(int, input().split())
+arr = []
+for i in range(R):
+    arr.append(list(map(int, input().split())))
+
+# 알고리즘
+dx = [1, -1, 0, 0]
+dy = [0, 0, 1, -1]
+cleaner = []
+
+def spread():
+    newArr = [[0 for i in range(C)] for i in range(R)]
+    for i in range(R):
+        for j in range(C):
+            if arr[i][j] == -1:
+                newArr[i][j] = -1
+                cleaner.append([i, j])
+            if arr[i][j] != 0 and arr[i][j] != -1:
+                count = 0
+                for k in range(4):
+                    nx = i + dx[k]
+                    ny = j + dy[k]
+
+                    if nx < 0 or nx >= R or ny < 0 or ny >= C:
+                        continue
+
+                    if arr[nx][ny] != -1:
+                        newArr[nx][ny] += arr[i][j] // 5
+                        count += 1
+                newArr[i][j] += arr[i][j] - ((arr[i][j] // 5) * count)         
+    return newArr
+
+def clean(a, b, mode):
+    cx, cy = a, b  
+    dx, dy = [], []
+    if mode == 0:   # 동북서남(반시계방향)
+        dx = [0, -1, 0, 1]
+        dy = [1, 0, -1, 0]
+    else:           # 동남서북(시계방향)
+        dx = [0, 1, 0, -1]
+        dy = [1, 0, -1, 0]
+
+    direction = 0
+    beforeNum = 0
+    while True:
+        nx = cx + dx[direction]
+        ny = cy + dy[direction]
+
+        if nx < 0 or nx >= R or ny < 0 or ny >= C:
+            direction += 1
+            continue
+
+        if arr[nx][ny] == -1:
+            break
+        nextNum = arr[nx][ny]
+        arr[nx][ny] = beforeNum
+        beforeNum = nextNum
+        cx, cy = nx, ny
+
+for i in range(T):
+    arr = spread()
+    clean(cleaner[0][0], cleaner[0][1], 0)
+    clean(cleaner[1][0], cleaner[1][1], 1)
+    cleaner = []
+
+# 출력
+answer = 0
+for i in arr:
+    answer += sum(i)
+print(answer + 2)
