@@ -1,0 +1,16 @@
+# Baekjoon 1120 : 문자열
+
+# 입력
+A, B = input().split()
+
+# 알고리즘
+answer = 50
+for i in range(len(B) - len(A) + 1):
+    count = 0
+    for j in range(len(A)):
+        if A[j] != B[i + j]:
+            count += 1
+    answer = min(answer, count)  
+
+# 출력
+print(answer)
