@@ -1,0 +1,17 @@
+# Baekjoon 1748 : 수 이어 쓰기 1
+
+# 입력
+N = input()
+
+# 알고리즘
+numLen = len(N) - 1
+answer = 0
+index = 0
+while index < numLen:   # 가장 긴 자릿수 전까지 ex) 120이면 1 ~ 99까지
+    answer += 9 * (10 ** index) * (index + 1)
+    index += 1
+# 가장 긴 자릿수 계산 ex) 120이면 100 ~ 120까지
+answer += ((int(N) - (10 ** numLen)) + 1) * (numLen + 1)
+
+# 출력
+print(answer)
