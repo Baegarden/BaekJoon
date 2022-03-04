@@ -1,0 +1,36 @@
+# Baekjoon 15685 : 드래곤 커브
+
+# 입력
+N = int(input())
+arr = [[0 for i in range(101)] for i in range(101)]
+
+# 알고리즘
+dx = [0, -1, 0, 1]     # 동북서남
+dy = [1, 0, -1, 0]
+
+for t in range(N):
+    y, x, d, g = map(int, input().split())
+    arr[x][y] = 1
+    direction = d
+    route = [d]
+
+    for i in range(g):  # 경로 구하기
+        tmproute = []
+        for j in range(len(route)):
+            tmproute.append((route[j] + 1) % 4) 
+        tmproute.reverse()
+        route += tmproute
+
+    for i in route:     # 경로를 따라 이동
+        x = x + dx[i]
+        y = y + dy[i]
+        arr[x][y] = 1
+
+# 출력
+answer = 0
+for i in range(100):
+    for j in range(100):
+        if arr[i][j] == 1:
+            if arr[i][j+1] == 1 and arr[i+1][j] == 1 and arr[i+1][j+1] == 1:
+                answer += 1
+print(answer)
