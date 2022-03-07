@@ -1,0 +1,55 @@
+# Baekjoon 14890 : 경사로
+
+# 입력
+N, L = map(int, input().split())
+arr = []
+for i in range(N):
+    arr.append(list(map(int, input().split())))
+
+# 알고리즘
+answer = 0
+def func(road):
+    global answer
+    distance = 0
+    flag = 0 
+    for j in range(N-1):
+        distance += 1
+        if abs(road[j] - road[j+1]) >= 2:
+            break
+        elif (road[j] - road[j+1]) == 1:     # 내리막길
+            if flag == 1:   # 내리막길 -> 내리막길
+                if distance < L:
+                    break
+                else:
+                    distance = 0
+            else:           # 오르막길 -> 내리막길
+                distance = 0
+                flag = 1
+        elif (road[j] - road[j+1]) == -1:    # 오르막길
+            if flag == 1:   # 내리막길 -> 오르막길
+                if distance < 2 * L:
+                    break
+                else:
+                    distance = 0
+                    flag = 0
+            else:           # 오르막길 -> 오르막길
+                if distance < L:
+                    break
+                else:
+                    distance = 0
+    else:
+        distance += 1   # 마지막 인덱스
+        if flag == 0 or (flag == 1 and distance >= L):
+            answer += 1
+
+for i in arr:
+    func(i)
+
+for i in range(N):
+    tmpArr = []
+    for j in range(N):
+        tmpArr.append(arr[j][i])
+    func(tmpArr)
+
+# 출력
+print(answer)
