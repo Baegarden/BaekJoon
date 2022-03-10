@@ -1,0 +1,62 @@
+# Baekjoon 3085 : 사탕 게임
+
+# 입력
+N = int(input())
+arr = []
+for i in range(N):
+    arr.append(list(input()))
+
+# 알고리즘
+dx = [0, 0, 1, -1]
+dy = [1, -1, 0, 0]
+answer = 0
+
+def check(array):
+    global answer
+
+    # 행 체크  
+    for i in array:
+        pre = ''
+        count = 1
+        for j in i:
+            if j == pre:
+                count += 1
+            else:
+                pre = j
+                count = 1
+            answer = max(answer, count)
+
+    # 열 체크
+    for i in range(N):
+        pre = ''
+        count = 1
+        for j in range(N):
+            if array[j][i] == pre:
+                count += 1
+            else:
+                pre = array[j][i]
+                count = 1
+            answer = max(answer, count)
+
+def change(x, y):
+    for i in range(4):
+        nx = x + dx[i]
+        ny = y + dy[i]
+
+        if nx < 0 or nx >= N or ny < 0 or ny >= N:
+            continue
+
+        if arr[nx][ny] != arr[x][y]:
+            tmp = arr[x][y]
+            arr[x][y] = arr[nx][ny]
+            arr[nx][ny] = tmp
+            check(arr)
+            tmp = arr[x][y]
+            arr[x][y] = arr[nx][ny]
+            arr[nx][ny] = tmp
+
+# 출력
+for i in range(N):
+    for j in range(N):
+        change(i, j)
+print(answer)
