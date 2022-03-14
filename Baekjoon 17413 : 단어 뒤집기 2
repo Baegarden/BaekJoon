@@ -1,0 +1,40 @@
+# Baekjoon 17413 : 단어 뒤집기 2
+
+# 입력
+S = input()
+
+# 알고리즘
+answer = []
+stack = ''
+flag = 1
+
+def getReversed(s):
+    a = list(s)
+    a.reverse()
+    b = ''.join(a)
+    return b
+
+for j, i in enumerate(S): 
+    if i == '<':
+        flag = 0
+        if stack != '':
+            answer.append(getReversed(stack))
+            stack = ''
+        stack += i
+    elif i == '>':
+        flag = 1
+        stack += i
+        answer.append(stack)
+        stack = ''
+    elif i == ' ' and flag == 1:
+        answer.append(getReversed(stack))
+        answer.append(' ')
+        stack = ''        
+    elif j == len(S) - 1:
+        stack += i
+        answer.append(getReversed(stack))
+    else:
+        stack += i
+
+# 출력
+print(''.join(answer))
