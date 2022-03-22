@@ -1,0 +1,22 @@
+# Baekjoon 2941 : 크로아티아 알파벳
+
+# 입력
+s = input()
+arr = ['c=', 'c-', 'dz=', 'd-', 'lj', 'nj', 's=', 'z=']
+
+# 알고리즘
+index = 0
+answer = 0
+while index < len(s):
+    if s[index:index+3] in arr:
+        index += 3
+        answer += 1
+    elif s[index:index+2] in arr:
+        index += 2
+        answer += 1
+    else:
+        index += 1
+        answer += 1
+    
+# 출력
+print(answer)
