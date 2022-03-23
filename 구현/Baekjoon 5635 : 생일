@@ -1,0 +1,47 @@
+# Baekjoon 5635 : 생일
+
+# 입력
+N = int(input())
+
+# 알고리즘
+arr = []
+maxYear, maxMonth, maxDay, maxName = 2010, 12, 31, ''
+minYear, minMonth, minDay, minName = 1990, 1, 1, ''
+
+def changeMax(year, month, day, name):
+    global maxYear, maxMonth, maxDay, maxName
+    maxYear = year
+    maxMonth = month
+    maxDay = day
+    maxName = name
+
+def changeMin(year, month, day, name):
+    global minYear, minMonth, minDay, minName
+    minYear = year
+    minMonth = month
+    minDay = day
+    minName = name
+
+for i in range(N):
+    S = input().split(" ")
+    if maxYear > int(S[3]):
+        changeMax(int(S[3]), int(S[2]), int(S[1]), S[0])
+    elif maxYear == int(S[3]):
+        if maxMonth > int(S[2]):
+            changeMax(int(S[3]), int(S[2]), int(S[1]), S[0])
+        elif maxMonth == int(S[2]):
+            if maxDay > int(S[1]):
+                changeMax(int(S[3]), int(S[2]), int(S[1]), S[0])
+    
+    if minYear < int(S[3]):
+        changeMin(int(S[3]), int(S[2]), int(S[1]), S[0])
+    elif minYear == int(S[3]):
+        if minMonth < int(S[2]):
+            changeMin(int(S[3]), int(S[2]), int(S[1]), S[0])
+        elif minMonth == int(S[2]):
+            if minDay < int(S[1]):
+                changeMin(int(S[3]), int(S[2]), int(S[1]), S[0])
+
+# 출력
+print(minName)
+print(maxName)
