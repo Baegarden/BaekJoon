@@ -1,0 +1,30 @@
+# Baekjoon 10973 : 이전 수열
+
+# 입력
+N = int(input())
+arr = list(map(int, input().split()))
+
+# 알고리즘
+# 출력
+maxIndex = -1
+for i in range(N-1):
+    if arr[i] > arr[i+1]:
+        maxIndex = i
+
+if maxIndex == -1:
+    print(-1)
+else:
+    for i in range(maxIndex+1, N):
+        if arr[i] < arr[maxIndex]:
+            minIndex = i
+        
+        tmp = arr[maxIndex]
+        arr[maxIndex] = arr[minIndex]
+        arr[minIndex] = tmp
+
+        tmpArr = arr[maxIndex+1:]
+        tmpArr.sort(reverse=True)
+        result = arr[:maxIndex+1] + tmpArr
+
+        for j in result:
+            print(j, end=" ")
