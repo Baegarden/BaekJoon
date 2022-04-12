@@ -1,0 +1,29 @@
+# Baekjoon 1051 : 숫자 정사각형
+
+# 입력
+N, M = map(int, input().split())
+arr = []
+for i in range(N):
+    arr.append(list(map(int, input())))
+
+# 알고리즘
+answer = 0
+for i in range(N):
+    for j in range(M):
+        arrN, arrM = [], []
+
+        for k in range(i, N):
+            if arr[i][j] == arr[k][j]:
+                arrN.append(k)
+        
+        for k in range(j, M):
+            if arr[i][j] == arr[i][k]:
+                arrM.append(k)
+
+        for k in arrN:
+            for p in arrM:
+                if k-i == p-j and arr[i][j] == arr[k][p]:
+                    answer = max(answer, (k-i+1) * (p-j+1))
+
+# 출력
+print(answer)
