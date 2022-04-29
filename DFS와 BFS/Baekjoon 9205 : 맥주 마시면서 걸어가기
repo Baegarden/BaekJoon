@@ -1,0 +1,30 @@
+# Baekjoon 9205 : 맥주 마시면서 걸어가기
+from collections import deque
+
+t = int(input())
+for i in range(t):
+    n = int(input())
+    startX, startY = map(int, input().split())
+    store = []
+    for j in range(n):
+        storeX, storeY = map(int, input().split())
+        store.append([storeX, storeY])
+    endX, endY = map(int, input().split())
+    store.append([endX, endY])
+
+    visit = [[startX, startY]]
+    queue = deque()
+    queue.append([startX, startY])
+    while queue:
+        x, y = queue.popleft()
+        
+        if x == endX and y == endY:
+            print('happy')
+            break
+
+        for j in store:
+            if j not in visit and abs(x - j[0]) + abs(y - j[1]) <= 1000:
+                visit.append(j)
+                queue.append(j)
+    else:
+        print('sad')
