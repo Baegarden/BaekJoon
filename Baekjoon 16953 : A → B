@@ -1,0 +1,25 @@
+# Baekjoon 16953 : A → B
+from collections import deque
+
+# 입력
+A, B = map(int, input().split())
+
+# 알고리즘
+queue = deque()
+queue.append([A, 0])
+while queue:
+    x, depth = queue.popleft()
+
+    if x == B:
+        print(depth+1)
+        break
+
+    if x * 2 <= B:
+        queue.append([x * 2, depth + 1])
+
+    if x * 10 + 1 <= B:
+        queue.append([x * 10 + 1, depth + 1])
+else:
+    print(-1)
+
+# 출력
